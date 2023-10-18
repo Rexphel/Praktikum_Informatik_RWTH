@@ -25,13 +25,13 @@ class Fahrzeug{
 };
 
 Fahrzeug::Fahrzeug(void){							//Default Constructor
-	std::cout << "Vehicle "" is being created" << std::endl;
+	std::cout << "Vehicle n." << p_iID << " is being created" << std::endl;
 	Fahrzeug::p_iMaxID++;
 
 };
 
 Fahrzeug::Fahrzeug(std::string s) : p_sName(s){		//
-	std::cout << "Vehicle "+s+" is being created" << std::endl;
+	std::cout << "Vehicle  n." << p_iID << s << " is being created" << std::endl;
 	Fahrzeug::p_iMaxID++;
 };
 
