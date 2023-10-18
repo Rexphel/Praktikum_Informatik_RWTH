@@ -44,14 +44,16 @@ void vAufgabe_1(){
 	std::shared_ptr<Fahrzeug> Fiat = std::make_shared<Fahrzeug>("500");
 
 	std::cout << "Tesla ref " << Tesla.use_count() << " " << Tesla->getName() << std::endl;
-	std::shared_ptr<std::shared_ptr<Fahrzeug>> ptr_Tesla = std::make_shared<std::shared_ptr<Fahrzeug>>(Tesla);			//No move needed, due to shared_ptr being able to have multiple references/"owners"
+	std::shared_ptr ptr_Tesla = Tesla;			//No move needed, due to shared_ptr being able to have multiple references/"owners"
 	std::cout << "Tesla ref " << Tesla.use_count() << " " << Tesla->getName() << std::endl;
+
+	std::cout << "Addresses: " << std::addressof(Tesla)<< " " << std::addressof(ptr_Tesla)<< " " << ptr_Tesla.get()<< std::endl;
 
 	s_vFahrzeuge.push_back(move(Tesla));
 
 	std::cout << "Tesla null " << (Tesla==NULL) << std::endl;															//Pointers after a move point to Null
 
-	std::cout << "ptr_Tesla ref " << ptr_Tesla.use_count() << " " << ptr_Tesla->get()->getName() << std::endl;			//Even after move, ptr_Tesla still has the Values for the Tesla Object. Therefore it now points to s_vFahrzeuge[Tesla]
+	std::cout << "ptr_Tesla ref " << ptr_Tesla.use_count() << " " << ptr_Tesla->getName() << std::endl;			//Even after move, ptr_Tesla still has the Values for the Tesla Object. Therefore it now points to s_vFahrzeuge[Tesla]
 
 	std::cout << "Tesla ref " << Tesla.use_count() << std::endl;														//After move in Array Tesla is empty/"elsewhere" and therefore the refrences are 0
 	std::cout << s_vFahrzeuge[0].get() << std::endl;
