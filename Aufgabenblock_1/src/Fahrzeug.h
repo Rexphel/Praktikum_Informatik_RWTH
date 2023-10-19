@@ -7,17 +7,22 @@
 //============================================================================
 #include <string>
 #include <iostream>
+#include <iomanip>
 
 class Fahrzeug{
 	protected:
-		static inline int p_iMaxID=0;
+		static inline int p_iMaxID = 0;
 	private:
 		const std::string p_sName = "";				//Default Name is Empty Sting
 		const int p_iID = p_iMaxID + 1;				//Given Object ID is the current MAX ID + 1
 		Fahrzeug(const Fahrzeug&) = delete;			//Do not allow Copy Constructor
+		const double p_dMaxGeschwindigkeit = 0.0;
+		double p_dGesamtStrecke = 0.0;
+		double p_dZeit = 0.0;
 	public:
+		void vAusgeben(void);
 		Fahrzeug();
-		Fahrzeug(std::string p_sName);
+		Fahrzeug(std::string p_sName, double p_dMaxGeschwindigkeit);
 		virtual ~Fahrzeug();
 		std::string getName(void);
 		int getID(void);
@@ -30,7 +35,7 @@ Fahrzeug::Fahrzeug(void){							//Default Constructor
 
 };
 
-Fahrzeug::Fahrzeug(std::string s) : p_sName(s){		//
+Fahrzeug::Fahrzeug(std::string s, double d): p_sName(s), p_dMaxGeschwindigkeit(d>0 ? d:0){		//Check if d is smaller than 0 (i.e. negative), set it to 0. Could also use std::abs(d) to set it to remove the -. Depends on application.
 	std::cout << "Vehicle  n." << p_iID << s << " is being created" << std::endl;
 	Fahrzeug::p_iMaxID++;
 };
@@ -48,3 +53,18 @@ int Fahrzeug::getID(void){
 	return p_iID;
 }
 
+void Fahrzeug::vAusgeben(void){
+	void vKopf(int iWidth);
+
+	int iWidth = 15;
+
+	vKopf(iWidth);
+}
+
+void vKopf(int iWidth){
+		std::cout << std::left
+				<< std::setw(iWidth) << "ID"
+				<< std::setw(iWidth) << "Name"
+				<< std::setw(iWidth) << "MaxSpeed"
+				<< std::setw(iWidth) << "Total distance \n";
+}
