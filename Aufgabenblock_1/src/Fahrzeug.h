@@ -9,6 +9,9 @@
 #include <iostream>
 #include <iomanip>
 
+const double dGlobaleZeit=0.0;
+
+
 class Fahrzeug{
 	protected:
 		static inline int p_iMaxID = 0;
@@ -56,15 +59,15 @@ int Fahrzeug::getID(void){
 void Fahrzeug::vAusgeben(void){
 	void vKopf(int iWidth);
 
-	int iWidth = 15;
+	int iWidth = 13;
 
 	vKopf(iWidth);
 }
 
 void vKopf(int iWidth){
-		std::cout << std::left
-				<< std::setw(iWidth) << "ID"
-				<< std::setw(iWidth) << "Name"
-				<< std::setw(iWidth) << "MaxSpeed"
-				<< std::setw(iWidth) << "Total distance \n";
+		std::cout << std::left << "ID" << std::setw(iWidth);
+		std::cout << "Name" << std::setw(iWidth)
+				<< "MaxSpeed"<< std::setw(1.5*iWidth);
+		std::cout	<< "Total distance\n" <<std::endl;
+		std::cout << std::setw(60) << std::setfill('-');
 }
