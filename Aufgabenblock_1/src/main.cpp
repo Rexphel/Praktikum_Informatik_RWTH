@@ -12,7 +12,7 @@
 #include <vector>
 #include "Fahrzeug.h"
 
-extern const double dGlobaleZeit;
+extern double dGlobaleZeit;
 
 int main() {
 
@@ -20,6 +20,8 @@ int main() {
 	void vAufgabe_1_verbose();
 
 	std::cout << "Starting Vehicle Simulator 1923" << std::endl;
+
+	dGlobaleZeit = 1;
 
 	vAufgabe_1();
 
@@ -32,6 +34,8 @@ void vAufgabe_1(){
 	Fahrzeug *Mercedes = new Fahrzeug("B-Klasse", 100.0);
 	Fahrzeug *Mini = new Fahrzeug("Cooper" ,85.53);
 	Fahrzeug *Empty = new Fahrzeug();
+	Fahrzeug *longCar = new Fahrzeug("ABCDEFGHIJKLMNOP", 234894321.3948523573);
+
 
 	for (auto &p : {Mercedes, Mini, Empty}){
 		delete p;
@@ -47,7 +51,7 @@ void vAufgabe_1(){
 	std::shared_ptr<Fahrzeug> Tesla = std::make_shared<Fahrzeug>("Model Y", 180.574);
 	std::shared_ptr<Fahrzeug> Fiat = std::make_shared<Fahrzeug>("500", 60.32);
 
-	auto ptr_Tesla = std::make_shared<std::shared_ptr<Fahrzeug>>(Tesla);																					//No move needed, due to shared_ptr being able to have multiple references/"owners"
+	auto ptr_Tesla = std::make_shared<std::shared_ptr<Fahrzeug>>(Tesla);												//No move needed, due to shared_ptr being able to have multiple references/"owners"
 
 	s_vFahrzeuge.push_back(move(Tesla));
 
@@ -58,7 +62,11 @@ void vAufgabe_1(){
 	u_vFahrzeuge.clear();																								//Object Fahrzeug is only destroyed when the reference has been destroyed. Therefore the deconstructor is called here.
 	s_vFahrzeuge.clear();
 
+	Fahrzeug::vKopf();
 	BMW.vAusgeben();
+	ptr_Tesla->get()->vAusgeben();
+	VW.vAusgeben();
+	longCar->vAusgeben();
 
 }
 
@@ -86,7 +94,7 @@ void vAufgabe_1_verbose(){
 
 
 	std::cout << "Tesla ref " << Tesla.use_count() << " " << Tesla->getName() << std::endl;
-	auto ptr_Tesla = std::make_shared<std::shared_ptr<Fahrzeug>>(Tesla);																					//No move needed, due to shared_ptr being able to have multiple references/"owners"
+	auto ptr_Tesla = std::make_shared<std::shared_ptr<Fahrzeug>>(Tesla);												//No move needed, due to shared_ptr being able to have multiple references/"owners"
 	std::cout << "Tesla ref " << Tesla.use_count() << " " << Tesla->getName() << std::endl;
 
 	std::cout << "Addresses: " << std::addressof(Tesla)<< " " << std::addressof(ptr_Tesla)<< " " << ptr_Tesla.get()<< std::endl;
