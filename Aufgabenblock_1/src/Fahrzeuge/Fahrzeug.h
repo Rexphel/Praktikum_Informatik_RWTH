@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : Aufgabenblock_1.cpp
 // Author      : Philip Rexroth
-// Version     :
+// Version     : 0.0.1
 // Copyright   : Copyright (c) 2023 Philip Rexroth
 // Description : Standard Class for Vehicles in Vehicle Sim 1923
 //============================================================================
@@ -15,20 +15,21 @@
 #define DEBUG_MSG(str) do { } while ( false )
 #endif
 
-extern double dGlobaleZeit=0.0;
+double dGlobaleZeit = 0.0;
 
 std::string setStringlengt(long long i, std::string s);
 
 class Fahrzeug{
 	protected:
 		static inline int p_iMaxID = 0;
-	private:
 		const std::string p_sName = "";				//Default Name is Empty Sting
 		const int p_iID = p_iMaxID + 1;				//Given Object ID is the current MAX ID + 1
-		Fahrzeug(const Fahrzeug&) = delete;			//Do not allow Copy Constructor
 		const double p_dMaxGeschwindigkeit = 0.0;
 		double p_dGesamtStrecke = 0.0;
+		double p_dGesamtZeit = 0.0;
 		double p_dZeit = 0.0;
+	private:
+		Fahrzeug(const Fahrzeug&) = delete;			//Do not allow Copy Constructor
 	public:
 		Fahrzeug();
 		Fahrzeug(std::string p_sName, double p_dMaxGeschwindigkeit);
@@ -47,7 +48,7 @@ Fahrzeug::Fahrzeug(void){							//Default Constructor
 
 };
 
-Fahrzeug::Fahrzeug(std::string s, double d): p_sName(setStringlengt(14, s)), p_dMaxGeschwindigkeit(d>0 ? d:0){		//Check if d is smaller than 0 (i.e. negative), set it to 0. Could also use std::abs(d) to set it to remove the -. Depends on application.
+Fahrzeug::Fahrzeug(std::string s, double d): p_sName(setStringlengt(14, s)), p_dMaxGeschwindigkeit(d>0 ? d:0){		//Check if d is smaller than 0 (i.e. negative), set it to 0. Could also use std::abs(d) to set it to remove the -. Depends on application. Use of setStringlength to keep the name sting from breaking the output
 	DEBUG_MSG("Vehicle  n." << p_iID << s << " is being created");
 	Fahrzeug::p_iMaxID++;
 };
@@ -60,7 +61,7 @@ std::string Fahrzeug::getName(void){
 	return p_sName;
 }
 
-std::string setStringlengt(long long i, std::string s){
+std::string setStringlengt(long long i, std::string s){																//Function to set a given string to any given size
 	s.resize(i,' ');
 	return s;
 }
@@ -70,7 +71,10 @@ int Fahrzeug::getID(void){
 }
 
 void Fahrzeug::vSimulieren(void){
-
+	double ideltaTime = dGlobaleZeit - Fahrzeug::p_dZeit;
+	Fahrzeug::p_dGesamtStrecke += Fahrzeug::p_dMaxGeschwindigkeit*ideltaTime;
+	Fahrzeug::p_dGesamtZeit += ideltaTime;
+	Fahrzeug::p_dZeit = dGlobaleZeit;
 }
 
 void Fahrzeug::vAusgeben(void){

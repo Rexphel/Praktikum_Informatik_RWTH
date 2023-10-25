@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : main.cpp
 // Author      : Philip Rexroth
-// Version     :
+// Version     : 0.0.1
 // Copyright   : Copyright (c) 2023 Philip Rexroth
 // Description : Main file for Vehicle Simulator 1923
 //============================================================================
@@ -10,20 +10,21 @@
 #include <string>
 #include <memory>
 #include <vector>
-#include "Fahrzeug.h"
+#include "./Fahrzeuge/Fahrzeug.h"
 
 extern double dGlobaleZeit;
 
 int main() {
 
 	void vAufgabe_1();
+	void vAufgabe_1_a();
 	void vAufgabe_1_verbose();
 
 	std::cout << "Starting Vehicle Simulator 1923" << std::endl;
 
 	dGlobaleZeit = 1;
 
-	vAufgabe_1();
+	vAufgabe_1_a();
 
 	return 0;
 }
@@ -67,6 +68,25 @@ void vAufgabe_1(){
 	ptr_Tesla->get()->vAusgeben();
 	VW.vAusgeben();
 	longCar->vAusgeben();
+
+}
+
+void vAufgabe_1_a(){
+	std::vector<std::unique_ptr<Fahrzeug>> u_vFahrzeuge;
+	u_vFahrzeuge.push_back(std::make_unique<Fahrzeug>("Mercedes S Klasse", 200.5));
+	u_vFahrzeuge.push_back(std::make_unique<Fahrzeug>("Fiat 500", 160));
+	u_vFahrzeuge.push_back(std::make_unique<Fahrzeug>("VW Polo GTI", 180.65));
+
+	for(int i=0; i<10; i++){
+		for(unsigned int k=0; k<u_vFahrzeuge.size(); k++){
+			u_vFahrzeuge[k]->vSimulieren();
+		}
+		dGlobaleZeit += 0.5;
+	}
+	Fahrzeug::vKopf();
+	for(unsigned int k=0; k<u_vFahrzeuge.size(); k++){
+			u_vFahrzeuge[k]->vAusgeben();
+		}
 
 }
 
