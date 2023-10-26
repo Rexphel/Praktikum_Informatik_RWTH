@@ -1,4 +1,6 @@
 bin
 *.class
-*/Debug/
-*/.settings/
+**/Debug/
+**/.settings/
+Aufgabenblock_*/.settings/
+Aufgabenblock_*/Debug/
