@@ -10,7 +10,8 @@
 #include <string>
 #include <memory>
 #include <vector>
-#include "./Fahrzeuge/Fahrzeug.h"
+#include "./Fahrzeuge/PKW.h"
+
 
 extern double dGlobaleZeit;
 
@@ -64,10 +65,10 @@ void vAufgabe_1(){
 	s_vFahrzeuge.clear();
 
 	Fahrzeug::vKopf();
-	BMW.vAusgeben();
-	ptr_Tesla->get()->vAusgeben();
-	VW.vAusgeben();
-	longCar->vAusgeben();
+	BMW.vAusgeben(); std::cout<<std::endl;
+	ptr_Tesla->get()->vAusgeben(); std::cout<<std::endl;
+	VW.vAusgeben(); std::cout<<std::endl;
+	longCar->vAusgeben(); std::cout<<std::endl;
 
 }
 
@@ -83,9 +84,8 @@ void vAufgabe_1_a(){
 		}
 		dGlobaleZeit += 0.5;
 	}
-	Fahrzeug::vKopf();
 	for(unsigned int k=0; k<u_vFahrzeuge.size(); k++){
-			u_vFahrzeuge[k]->vAusgeben();
+			u_vFahrzeuge[k]->vAusgeben();std::cout<<std::endl;
 		}
 
 }
