@@ -8,6 +8,13 @@
 
 #include "Fahrzeug.h"
 
-class PKW : public Fahrzeug{
-
+class Fahrrad : public Fahrzeug{
+	private:
+	public:
+		double dGeschwindigkeit(void);
 };
+
+double Fahrrad::dGeschwindigkeit(void){
+	double dSpeed = getMaxSpeed()*((getTotalDistance()*0.01)+1);			//x*0.01+1 is the formula to get the wanted delta
+	return dSpeed>12 ? dSpeed:12;
+}

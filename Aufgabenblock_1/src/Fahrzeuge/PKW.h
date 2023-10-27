@@ -26,7 +26,7 @@ class PKW : public Fahrzeug{
 		double dTanken(void);
 		double dTanken(double dquantity);
 		void vAusgeben(void);
-		void static vKopf(void);
+		static void vKopf(void);
 };
 
 PKW::PKW(std::string sName, double dMaxSpeed, double dconsuption, double dMaxFuel = 55) : Fahrzeug(setStringlengt(14, sName), (dMaxSpeed>0 ? dMaxSpeed:0)), p_dVerbrauch(dconsuption), p_dTankvolumen(dMaxFuel), p_dTankinhalt(dMaxFuel/2){
@@ -38,7 +38,7 @@ void PKW::vSimulieren(void){
 	double dusedFuel = getConsumpt()*ddeltaTime;
 	double dFuelratio = getFuellevel()/dusedFuel;
 	double ddeltaFuel = getFuellevel()-dusedFuel;
-	Fahrzeug::vSimulieren(dFuelratio);
+	Fahrzeug::vSimulieren(getMaxSpeed(), dFuelratio);
 	setFuellevel((ddeltaFuel>0) ? ddeltaFuel:0);
 
 }
@@ -53,7 +53,21 @@ double PKW::dTanken(double dquantity){
 	return dquantity;
 }
 
-void vAusgeben(void){
+void PKW::vAusgeben(void){
+	Fahrzeug::vAusgeben();
+	std::cout.width(16);																					//15 Space for p_dTankinhalt
+	std::resetiosflags(std::ios::left);																		//Reset alignment
+	std::cout << std::setiosflags(std::ios::right) << getFuellevel();										//Output p_iID right aligned
+	std::cout.width(17);																					//15 Space for Name. (Name max 15 Chars)
+	std::cout << Fahrzeug::getTotalDistance()*getConsumpt() << std::resetiosflags(std::ios::right);			//Output p_sName left aligned
+}
 
+void PKW::vKopf(void){
+	PKW::Fahrzeug::vKopf();
+	std::cout.width(16);
+	std::cout << std::setiosflags(std::ios::right) << "Fuellevel" ;
+	std::cout.width(17);
+	std::cout << "Used Fuel" << "\n" << std::resetiosflags(std::ios::right);
+	std::cout << std::setfill('-') << std::setw(120)<<"\n" << std::setfill(' ');
 }
 

@@ -44,9 +44,11 @@ class Fahrzeug{
 		void setTotalTime(double d){p_dGesamtZeit=d;}
 		void setLastTime(double d){p_dZeit=d;}
 		void vincrMaxID(void){p_iMaxID++;}
-		virtual void vSimulieren(double delta);
+		virtual void vSimulieren(double dSpeed, double dDelta);
+		virtual double dGeschwindigkeit(){return p_dMaxGeschwindigkeit;};
+		virtual double dTanken(void){return 0.0;}
 		virtual void vAusgeben(void);
-		virtual static void vKopf(void);
+		static void vKopf(void);
 
 };
 
@@ -70,10 +72,10 @@ std::string setStringlengt(long long i, std::string s){																//Functio
 	return s;
 }
 
-void Fahrzeug::vSimulieren(double delta=0) {
-	double ideltaTime = dGlobaleZeit - Fahrzeug::getLastTime();
-	Fahrzeug::setTotalDistance(Fahrzeug::getTotalDistance()+Fahrzeug::getMaxSpeed()*ideltaTime);
-	Fahrzeug::setTotalTime(Fahrzeug::getTotalTime()+ideltaTime);
+void Fahrzeug::vSimulieren(double dSpeed, double dDelta=1) {
+	double ideltaTime = dGlobaleZeit - getLastTime();
+	Fahrzeug::setTotalDistance(getTotalDistance()+ dSpeed*ideltaTime*dDelta);
+	Fahrzeug::setTotalTime(getTotalTime()+ideltaTime);
 	Fahrzeug::setLastTime(dGlobaleZeit);
 }
 
@@ -85,9 +87,11 @@ void Fahrzeug::vAusgeben(void){
 	std::cout.width(15);																				//15 Space for Name. (Name max 15 Chars)
 	std::cout << std::setiosflags(std::ios::left) << getName() << std::resetiosflags(std::ios::left);		//Output p_sName left aligned
 	std::cout.width(12);																				//12 Space for MaxSpeed
-	std::cout << std::setiosflags(std::ios::right) << getMaxSpeed();							//Output p_dMaxGeschwindigkeit right aligned
+	std::cout << std::setiosflags(std::ios::right) << getMaxSpeed();									//Output p_dMaxGeschwindigkeit right aligned
+	std::cout.width(20);																				//20 space for Current Speed
+	std::cout << dGeschwindigkeit();																	//Output current Speed right aligned
 	std::cout.width(20);																				//20 space for TotalDistance
-	std::cout << getTotalDistance() << std::resetiosflags(std::ios::right);						//Output p_dGesammtStrecke right aligned
+	std::cout << getTotalDistance() << std::resetiosflags(std::ios::right);								//Output p_dGesammtStrecke right aligned
 
 }
 
@@ -100,7 +104,9 @@ void Fahrzeug::vKopf(void){
 	std::cout.width(17);
 	std::cout << std::setiosflags(std::ios::right) << "MaxSpeed" ;
 	std::cout.width(20);
-	std::cout << "TotalDistance" << "\n" << std::resetiosflags(std::ios::right);
+	std::cout << "Current Speed";
+	std::cout.width(20);
+	std::cout << "TotalDistance" << std::resetiosflags(std::ios::right);
 //	std::cout << std::setfill('-') << std::setw(55)<<"\n" << std::setfill(' ');
 
 }

@@ -17,9 +17,10 @@ extern double dGlobaleZeit;
 
 int main() {
 
-	void vAufgabe_1();
-	void vAufgabe_1_a();
-	void vAufgabe_1_verbose();
+	void vAufgabe_1(void);
+	void vAufgabe_1_a(void);
+	void vAufgabe_1_verbose(void);
+	void vAufgabe_2(int iPKWs, int iFahrräder);
 
 	std::cout << "Starting Vehicle Simulator 1923" << std::endl;
 
@@ -30,7 +31,7 @@ int main() {
 	return 0;
 }
 
-void vAufgabe_1(){
+void vAufgabe_1(void){
 	Fahrzeug VW("Golf", 50.0);
 	Fahrzeug BMW("i5", 150.0);
 	Fahrzeug *Mercedes = new Fahrzeug("B-Klasse", 100.0);
@@ -72,8 +73,8 @@ void vAufgabe_1(){
 
 }
 
-void vAufgabe_1_a(){
-	std::vector<std::unique_ptr<Fahrzeug>> u_vFahrzeuge;
+void vAufgabe_1_a(void){
+	/*std::vector<std::unique_ptr<Fahrzeug>> u_vFahrzeuge;
 	u_vFahrzeuge.push_back(std::make_unique<Fahrzeug>("Mercedes S Klasse", 200.5));
 	u_vFahrzeuge.push_back(std::make_unique<Fahrzeug>("Fiat 500", 160));
 	u_vFahrzeuge.push_back(std::make_unique<Fahrzeug>("VW Polo GTI", 180.65));
@@ -86,11 +87,25 @@ void vAufgabe_1_a(){
 	}
 	for(unsigned int k=0; k<u_vFahrzeuge.size(); k++){
 			u_vFahrzeuge[k]->vAusgeben();std::cout<<std::endl;
-		}
+		}*/
+	std::vector<std::unique_ptr<PKW>> u_vPKWS;
+	u_vPKWS.push_back(std::make_unique<PKW>("Mercedes S Klasse", 200.5, 15, 70));
+	u_vPKWS.push_back(std::make_unique<PKW>("Fiat 500", 160, 7, 50));
+	u_vPKWS.push_back(std::make_unique<PKW>("VW Polo GTI", 180.65, 13));
 
+	for(int i=0; i<15; i++){
+		for(unsigned int k=0; k<u_vPKWS.size(); k++){
+			u_vPKWS[k]->vSimulieren();
+		}
+		dGlobaleZeit += 0.5;
+	}
+	PKW::vKopf();
+	for(unsigned int k=0; k<u_vPKWS.size(); k++){
+		u_vPKWS[k]->vAusgeben();std::cout<<std::endl;
+		}
 }
 
-void vAufgabe_1_verbose(){
+void vAufgabe_1_verbose(void){
 
 	Fahrzeug VW("Golf", 50.0);
 	Fahrzeug BMW("i5", 150.0);
@@ -144,4 +159,13 @@ void vAufgabe_1_verbose(){
 	ptr_Tesla = NULL;																									//As soon as the last reference is removed, Tesla is also destroyed and the deconstructor is called.
 
 	BMW.vAusgeben();
+}
+
+void vAufgabe_2(int iPKWs, int iFahrräder){
+	std::vector<std::unique_ptr<PKW>> u_vPKWS;
+//	std::vector<std::unique_ptr<Fahrrad>> u_vFahrräder;
+
+	for (int i=1; i<iPKWs; i++){
+
+	}
 }
