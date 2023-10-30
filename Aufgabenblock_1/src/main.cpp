@@ -10,7 +10,8 @@
 #include <string>
 #include <memory>
 #include <vector>
-#include "./Fahrzeuge/PKW.h"
+#include <random>
+#include "Fahrzeuge/GlobalIncludes.h"
 
 
 extern double dGlobaleZeit;
@@ -162,10 +163,22 @@ void vAufgabe_1_verbose(void){
 }
 
 void vAufgabe_2(int iPKWs, int iFahrräder){
-	std::vector<std::unique_ptr<PKW>> u_vPKWS;
-//	std::vector<std::unique_ptr<Fahrrad>> u_vFahrräder;
 
-	for (int i=1; i<iPKWs; i++){
+	double randDouble(int lower, int upper);
 
+	std::vector<std::unique_ptr<PKW>> v_uPKWS;
+		for (int i=1; i<iPKWs; i++){
+		v_uPKWS.push_back(std::make_unique<PKW>("PKW_"+i, randDouble(50, 350), randDouble(4, 20),randDouble(30, 200)));
 	}
+	std::vector<std::unique_ptr<Fahrrad>> v_uFahrräder;
+	std::uniform_real_distribution<double> dist(12,40);
+	for (int i=1; i<iFahrräder; i++){
+			v_uFahrräder.push_back(std::make_unique<Fahrrad>("PKW_"+i, randDouble(12,40)));
+		}
+}
+
+double randDouble(int lower, int upper){
+	std::default_random_engine rnd{std::random_device{}()};
+	std::uniform_real_distribution<double> dist(lower, upper);
+	return dist(rnd);
 }

@@ -15,7 +15,7 @@
 #define DEBUG_MSG(str) do { } while ( false )
 #endif
 
-double dGlobaleZeit = 0.0;
+extern double dGlobaleZeit;
 
 std::string setStringlengt(long long i, std::string s);
 

@@ -6,8 +6,6 @@
 // Description : Class for PKW in Vehicle Sim 1923
 //============================================================================
 
-#include "Fahrzeug.h"
-
 class Fahrrad : public Fahrzeug{
 	private:
 	public:

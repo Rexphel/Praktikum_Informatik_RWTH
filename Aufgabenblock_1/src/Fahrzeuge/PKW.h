@@ -7,7 +7,8 @@
 //============================================================================
 
 #include <string>
-#include "Fahrzeug.h"
+
+extern double dGlobaleZeit;
 
 class PKW : public Fahrzeug{
 
