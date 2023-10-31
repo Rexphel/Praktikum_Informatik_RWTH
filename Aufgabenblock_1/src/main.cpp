@@ -1,38 +1,44 @@
 //============================================================================
 // Name        : main.cpp
 // Author      : Philip Rexroth
-// Version     : 0.0.1
+// Version     : 0.3
 // Copyright   : Copyright (c) 2023 Philip Rexroth
 // Description : Main file for Vehicle Simulator 1923
 //============================================================================
 
+#include <conio.h>
 #include <iostream>
 #include <string>
 #include <memory>
 #include <vector>
 #include <random>
-#include "Fahrzeuge/GlobalIncludes.h"
+#include "GlobalIncludes.h"
 
 
 extern double dGlobaleZeit;
+void console_clear_screen(void);
+double randDouble(int lower, int upper);
+
 
 int main() {
 
-	void vAufgabe_1(void);
+	/*void vAufgabe_1(void);
 	void vAufgabe_1_a(void);
-	void vAufgabe_1_verbose(void);
-	void vAufgabe_2(int iPKWs, int iFahrräder);
+	void vAufgabe_1_verbose(void);*/
+	void vAufgabe_2(int iFahrzeuge);
+	void vAufgabe_3(void);
+	void vAufgabe_Probe();
 
 	std::cout << "Starting Vehicle Simulator 1923" << std::endl;
 
 	dGlobaleZeit = 1;
 
-	vAufgabe_1_a();
+	vAufgabe_Probe();
 
 	return 0;
 }
 
-void vAufgabe_1(void){
+/*void vAufgabe_1(void){
 	Fahrzeug VW("Golf", 50.0);
 	Fahrzeug BMW("i5", 150.0);
 	Fahrzeug *Mercedes = new Fahrzeug("B-Klasse", 100.0);
@@ -75,7 +81,7 @@ void vAufgabe_1(void){
 }
 
 void vAufgabe_1_a(void){
-	/*std::vector<std::unique_ptr<Fahrzeug>> u_vFahrzeuge;
+	std::vector<std::unique_ptr<Fahrzeug>> u_vFahrzeuge;
 	u_vFahrzeuge.push_back(std::make_unique<Fahrzeug>("Mercedes S Klasse", 200.5));
 	u_vFahrzeuge.push_back(std::make_unique<Fahrzeug>("Fiat 500", 160));
 	u_vFahrzeuge.push_back(std::make_unique<Fahrzeug>("VW Polo GTI", 180.65));
@@ -88,7 +94,7 @@ void vAufgabe_1_a(void){
 	}
 	for(unsigned int k=0; k<u_vFahrzeuge.size(); k++){
 			u_vFahrzeuge[k]->vAusgeben();std::cout<<std::endl;
-		}*/
+		}
 	std::vector<std::unique_ptr<PKW>> u_vPKWS;
 	u_vPKWS.push_back(std::make_unique<PKW>("Mercedes S Klasse", 200.5, 15, 70));
 	u_vPKWS.push_back(std::make_unique<PKW>("Fiat 500", 160, 7, 50));
@@ -160,25 +166,79 @@ void vAufgabe_1_verbose(void){
 	ptr_Tesla = NULL;																									//As soon as the last reference is removed, Tesla is also destroyed and the deconstructor is called.
 
 	BMW.vAusgeben();
-}
+}*/
 
-void vAufgabe_2(int iPKWs, int iFahrräder){
+void vAufgabe_2(int iFahrzeuge){
 
-	double randDouble(int lower, int upper);
-
-	std::vector<std::unique_ptr<PKW>> v_uPKWS;
-		for (int i=1; i<iPKWs; i++){
-		v_uPKWS.push_back(std::make_unique<PKW>("PKW_"+i, randDouble(50, 350), randDouble(4, 20),randDouble(30, 200)));
+	std::vector<std::unique_ptr<Fahrzeug>> v_uFahrzeuge;
+	for (int i=0; i<iFahrzeuge; i++){
+		v_uFahrzeuge.push_back(std::make_unique<PKW>("PKW_"+std::to_string(i), randDouble(50, 350), randDouble(4, 20),randDouble(30, 200)));
+		v_uFahrzeuge.push_back(std::make_unique<Fahrrad>("Fahrrad_"+std::to_string(i), randDouble(12,40)));
 	}
-	std::vector<std::unique_ptr<Fahrrad>> v_uFahrräder;
-	std::uniform_real_distribution<double> dist(12,40);
-	for (int i=1; i<iFahrräder; i++){
-			v_uFahrräder.push_back(std::make_unique<Fahrrad>("PKW_"+i, randDouble(12,40)));
+	bool stop = false;
+	while(!stop){
+
+		PKW::vKopf();
+		for(unsigned int i=0; i<v_uFahrzeuge.size(); i++){
+
+			std::cout<< *v_uFahrzeuge[i] <<std::endl;
 		}
+
+		//std::cout << (*v_uFahrzeuge[1]<*v_uFahrzeuge[0]) << std::endl;					//example < overload
+
+		std::string s;
+		std::cin >> s;
+		if(s == "stop"){stop=true;}
+
+
+		console_clear_screen();
+
+
+	}
 }
 
-double randDouble(int lower, int upper){
-	std::default_random_engine rnd{std::random_device{}()};
-	std::uniform_real_distribution<double> dist(lower, upper);
-	return dist(rnd);
+void vAufgabe_3(void){
+	std::vector<std::unique_ptr<Fahrzeug>> v_uFahrzeuge;
+	for (int i=0; i<5; i++){
+		v_uFahrzeuge.push_back(std::make_unique<PKW>("PKW_"+std::to_string(i), randDouble(50, 350), randDouble(4, 20),randDouble(30, 200)));
+		v_uFahrzeuge.push_back(std::make_unique<Fahrrad>("Fahrrad_"+std::to_string(i), randDouble(12,40)));
+	}
+	for(int k=0; k<10;k++){
+		for(unsigned int i=0; i<v_uFahrzeuge.size(); i++){
+			v_uFahrzeuge[i]->vSimulieren();
+			if(dGlobaleZeit==3){
+				//std::cout << std::fabs(dGlobaleZeit-3)<< std::endl;						//	Due to the simplicity of the operation, there is no observable "rounding" error. With more complex calculations with more granulate Numbers there WILL be a given amount of error. Especially for graphical Operations, this will lead to edge cases and rounding errors. Based on the IEEE 754 standard doubles have an precision of 1.11022302462516*10^-16. Consequently operations with irrational numbers and divisions will have rounding errors.
+				v_uFahrzeuge[i]->dTanken();
+			}
+		}
+		dGlobaleZeit += 0.5;
+	}
+
+	PKW::vKopf();
+	for(unsigned int i=0; i<v_uFahrzeuge.size(); i++){
+		std::cout<< *v_uFahrzeuge[i] <<std::endl;
+	}
+
+	std::unique_ptr<PKW> Benz = std::make_unique<PKW>("AMG", 200.9,9,60);
+
 }
+
+using namespace std;
+
+double dEpsilon = 0.001;
+
+void vAufgabe_Probe() {
+    Fahrzeug* pF1 = new PKW("Audi", 150, 8);
+    dGlobaleZeit = 0.0;
+    Fahrzeug::vKopf();
+    dGlobaleZeit = 5;
+    cout << endl << "Globalezeit = " << dGlobaleZeit << endl;
+    pF1->vSimulieren();
+    std::cout << *pF1 << endl;
+    delete pF1;
+    char c;
+    std::cin >> c;
+}
+
+
+
