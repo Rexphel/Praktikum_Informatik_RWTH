@@ -6,19 +6,9 @@
 // Description : Main file for Vehicle Simulator 1923
 //============================================================================
 
-#include <conio.h>
-#include <iostream>
-#include <string>
-#include <memory>
-#include <vector>
-#include <random>
-#include "GlobalIncludes.h"
-
+#include "GlobalIncludes.hpp"
 
 extern double dGlobaleZeit;
-void console_clear_screen(void);
-double randDouble(int lower, int upper);
-
 
 int main() {
 
@@ -33,7 +23,7 @@ int main() {
 
 	dGlobaleZeit = 1;
 
-	vAufgabe_Probe();
+	vAufgabe_2(4);
 
 	return 0;
 }
@@ -177,21 +167,25 @@ void vAufgabe_2(int iFahrzeuge){
 	}
 	bool stop = false;
 	while(!stop){
-
 		PKW::vKopf();
 		for(unsigned int i=0; i<v_uFahrzeuge.size(); i++){
 
 			std::cout<< *v_uFahrzeuge[i] <<std::endl;
 		}
-
-		//std::cout << (*v_uFahrzeuge[1]<*v_uFahrzeuge[0]) << std::endl;					//example < overload
-
 		std::string s;
 		std::cin >> s;
 		if(s == "stop"){stop=true;}
 
-
 		console_clear_screen();
+
+		for(unsigned int i=0; i<v_uFahrzeuge.size(); i++){
+			v_uFahrzeuge[i]->vSimulieren();
+			if(dGlobaleZeit==3){
+				//std::cout << std::fabs(dGlobaleZeit-3)<< std::endl;						//	Due to the simplicity of the operation, there is no observable "rounding" error. With more complex calculations with more granulate Numbers there WILL be a given amount of error. Especially for graphical Operations, this will lead to edge cases and rounding errors. Based on the IEEE 754 standard doubles have an precision of 1.11022302462516*10^-16. Consequently operations with irrational numbers and divisions will have rounding errors.
+				v_uFahrzeuge[i]->dTanken();
+			}
+		}
+		dGlobaleZeit += 0.5;
 
 
 	}
@@ -216,7 +210,7 @@ void vAufgabe_3(void){
 
 	PKW::vKopf();
 	for(unsigned int i=0; i<v_uFahrzeuge.size(); i++){
-		std::cout<< *v_uFahrzeuge[i] <<std::endl;
+		std::cout << *v_uFahrzeuge[i] <<std::endl;
 	}
 
 	std::unique_ptr<PKW> Benz = std::make_unique<PKW>("AMG", 200.9,9,60);

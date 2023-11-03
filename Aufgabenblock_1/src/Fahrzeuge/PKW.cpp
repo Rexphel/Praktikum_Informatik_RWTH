@@ -6,36 +6,18 @@
 // Description : Class for PKW in Vehicle Sim 1923
 //============================================================================
 
-#include <string>
+#include "h/PKW.hpp"
 
 extern double dGlobaleZeit;
 
 std::string setStringlength(long long lengt, std::string s);
 
-class PKW : public Fahrzeug{
+PKW::PKW(std::string sName, double dMaxSpeed, double dconsuption, double dMaxFuel) : Fahrzeug(setStringlength(14, sName), (dMaxSpeed>0 ? dMaxSpeed:0)), p_dVerbrauch(dconsuption), p_dTankvolumen(dMaxFuel), p_dTankinhalt(dMaxFuel/2){}
 
-	private:
-		double p_dVerbrauch = 0.0;
-		double p_dTankvolumen;
-		double p_dTankinhalt = 0.0;
-		PKW(const PKW&) = delete;			//Do not allow Copy Constructor
-	public:
-		PKW() = delete;
-		PKW(std::string sName, double dMaxSpeed, double dconsuption, double dMaxFuel);
-		PKW operator=(const PKW& f){return PKW(f.p_sName,f.p_dMaxGeschwindigkeit,f.p_dVerbrauch,f.p_dTankvolumen);}
-		void vSimulieren(void) override;
-		double getConsumpt(void) const{return p_dVerbrauch;}
-		double getVolume(void) const{return p_dTankvolumen;}
-		double getFuellevel(void) const{return p_dTankinhalt;}
-		void setFuellevel(double dTankinhalt){p_dTankinhalt=dTankinhalt;}
-		double dTanken(void);
-		double dTanken(double dquantity);
-		double dGeschwindigkeit(void) const override;
-		void vAusgeben(std::ostream& o) const override;
-		static void vKopf(void);
-};
-
-PKW::PKW(std::string sName, double dMaxSpeed, double dconsuption, double dMaxFuel = 55) : Fahrzeug(setStringlength(14, sName), (dMaxSpeed>0 ? dMaxSpeed:0)), p_dVerbrauch(dconsuption), p_dTankvolumen(dMaxFuel), p_dTankinhalt(dMaxFuel/2){}
+std::ostream& operator <<(std::ostream& o, const PKW& x){
+	x.vAusgeben(o);
+	return o;
+}
 
 void PKW::vSimulieren(void){
 	double ddeltaTime = dGlobaleZeit - Fahrzeug::getLastTime();
@@ -70,11 +52,6 @@ void PKW::vAusgeben(std::ostream& o) const{
 	o << Fahrzeug::getTotalDistance()*getConsumpt() << std::resetiosflags(std::ios::right);			//Output p_sName left aligned
 }
 
-std::ostream& operator<<(std::ostream& o, const PKW& x){											//another definition needed, for each class
-	x.vAusgeben(o);
-	return o;
-}
-
 void PKW::vKopf(void){
 	PKW::Fahrzeug::vKopf();
 	std::cout.width(16);
@@ -83,4 +60,3 @@ void PKW::vKopf(void){
 	std::cout << "Used Fuel" << "\n" << std::resetiosflags(std::ios::right);
 	std::cout << std::setfill('-') << std::setw(120)<<"\n" << std::setfill(' ');
 }
-

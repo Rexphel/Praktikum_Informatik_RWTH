@@ -1,17 +1,12 @@
 //============================================================================
-// Name        : Aufgabenblock_1.cpp
+// Name        : FreeFunctions.cpp
 // Author      : Philip Rexroth
 // Version     : 0.0.1
 // Copyright   : Copyright (c) 2023 Philip Rexroth
 // Description : Standard Class for Vehicles in Vehicle Sim 1923
 //============================================================================
-#include "Fahrzeuge/Fahrzeug.h"
-#include "Fahrzeuge/Fahrrad.h"
-#include "Fahrzeuge/PKW.h"
 
-#define WINDOWS 1
-#define LINUX 0
-#define DEBUG 1
+#include "GlobalIncludes.hpp"
 
 double dGlobaleZeit = 0.0;
 

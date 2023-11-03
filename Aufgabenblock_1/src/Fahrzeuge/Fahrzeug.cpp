@@ -5,52 +5,18 @@
 // Copyright   : Copyright (c) 2023 Philip Rexroth
 // Description : Standard Class for Vehicles in Vehicle Sim 1923
 //============================================================================
-#include <string>
-#include <iostream>
-#include <iomanip>
+
+#include "h/Fahrzeug.hpp"
+
+extern double dGlobaleZeit;
+
+std::string setStringlength(long long lengt, std::string s);
 
 #ifdef DEBUG
 #define DEBUG_MSG(str) do { std::cout << str << std::endl; } while( false )
 #else
 #define DEBUG_MSG(str) do { } while ( false )
 #endif
-
-extern double dGlobaleZeit;
-std::string setStringlength(long long lengt, std::string s);
-
-class Fahrzeug{
-	protected:
-		static inline int p_iMaxID = 0;
-		const std::string p_sName = "";				//Default Name is Empty Sting
-		const int p_iID = p_iMaxID + 1;				//Given Object ID is the current MAX ID + 1
-		const double p_dMaxGeschwindigkeit = 0.0;
-		double p_dGesamtStrecke = 0.0;
-		double p_dGesamtZeit = 0.0;
-		double p_dZeit = 0.0;
-	private:
-		Fahrzeug(const Fahrzeug&) = delete;			//Do not allow Copy Constructor
-	public:
-		Fahrzeug();
-		Fahrzeug(std::string p_sName, double p_dMaxGeschwindigkeit);
-		Fahrzeug operator=(const Fahrzeug& f){return Fahrzeug(f.p_sName,f.p_dMaxGeschwindigkeit);}
-		virtual ~Fahrzeug();
-		std::string getName(void){return p_sName;}
-		int getID(void){return p_iID;}
-		double getMaxSpeed(void) const{return p_dMaxGeschwindigkeit;}
-		double getTotalDistance(void) const{return p_dGesamtStrecke;}
-		double getTotalTime(void) const{return p_dGesamtZeit;}
-		double getLastTime(void) const{return p_dZeit;}
-		void setTotalDistance(double d){p_dGesamtStrecke=d;}
-		void setTotalTime(double d){p_dGesamtZeit=d;}
-		void setLastTime(double d){p_dZeit=d;}
-		void vincrMaxID(void){p_iMaxID++;}
-		virtual void vSimulieren();
-		virtual double dGeschwindigkeit()const {return p_dMaxGeschwindigkeit;};
-		virtual double dTanken(void){return 0.0;}
-		virtual void vAusgeben(std::ostream& out) const;
-		static void vKopf(void);
-
-};
 
 
 Fahrzeug::Fahrzeug(void){							//Default Constructor
@@ -68,7 +34,10 @@ Fahrzeug::~Fahrzeug(void) {
    DEBUG_MSG("Vehicle n."+std::to_string(Fahrzeug::getID())+" Name:"+Fahrzeug::getName()+" is being deleted");
 };
 
-
+std::ostream& operator <<(std::ostream& o, const Fahrzeug& x){
+	x.vAusgeben(o);
+	return o;
+}
 
 void Fahrzeug::vSimulieren() {
 	double ideltaTime = dGlobaleZeit - getLastTime();
@@ -90,11 +59,6 @@ void Fahrzeug::vAusgeben(std::ostream& out) const{
 	out << dGeschwindigkeit();																	//Output current Speed right aligned
 	out.width(20);																				//20 space for TotalDistance
 	out << p_dGesamtStrecke << std::resetiosflags(std::ios::right);								//Output p_dGesammtStrecke right aligned
-}
-
-std::ostream& operator <<(std::ostream& o, const Fahrzeug& x){										//definition outside of class due to the scope of the definition
-	x.vAusgeben(o);
-	return o;
 }
 
 bool operator <(const Fahrzeug& x, const Fahrzeug& y){
@@ -120,5 +84,3 @@ void Fahrzeug::vKopf(void){
 //	std::cout << std::setfill('-') << std::setw(55)<<"\n" << std::setfill(' ');
 
 }
-
-
