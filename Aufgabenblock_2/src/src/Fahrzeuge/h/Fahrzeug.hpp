@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : Aufgabenblock_1.cpp
 // Author      : Philip Rexroth
-// Version     : 1.0
+// Version     : 0.6
 // Copyright   : Copyright (c) 2023 Philip Rexroth
 // Description : Standard Class for Vehicles in Vehicle Sim 1923
 //============================================================================

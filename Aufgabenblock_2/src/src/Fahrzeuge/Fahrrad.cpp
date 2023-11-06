@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : Fahrrad.cpp
 // Author      : Philip Rexroth
-// Version     : 1.0
+// Version     : 0.1
 // Copyright   : Copyright (c) 2023 Philip Rexroth
 // Description : Member functions for Fahrrad in Vehicle Sim 1923
 //============================================================================

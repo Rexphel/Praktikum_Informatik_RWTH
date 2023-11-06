@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : main.cpp
 // Author      : Philip Rexroth
-// Version     : 1.0
+// Version     : 0.3
 // Copyright   : Copyright (c) 2023 Philip Rexroth
 // Description : Main file for Vehicle Simulator 1923
 //============================================================================

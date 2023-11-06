@@ -1,9 +1,9 @@
 //============================================================================
 // Name        : Aufgabenblock_1.cpp
 // Author      : Philip Rexroth
-// Version     : 1.0
+// Version     : 0.6
 // Copyright   : Copyright (c) 2023 Philip Rexroth
-// Description : Memberfunctions for Class Vehicles in Vehicle Sim 1923
+// Description : Standard Class for Vehicles in Vehicle Sim 1923
 //============================================================================
 
 #include "h/Fahrzeug.hpp"

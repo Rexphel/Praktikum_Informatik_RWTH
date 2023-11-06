@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : PKW.h
 // Author      : Philip Rexroth
-// Version     : 1.0
+// Version     : 0.5
 // Copyright   : Copyright (c) 2023 Philip Rexroth
 // Description : Class for PKW in Vehicle Sim 1923
 //============================================================================

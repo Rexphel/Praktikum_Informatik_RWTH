@@ -1,9 +1,9 @@
 //============================================================================
 // Name        : Aufgabenblock_1.cpp
 // Author      : Philip Rexroth
-// Version     : 1.0
+// Version     : 0.5
 // Copyright   : Copyright (c) 2023 Philip Rexroth
-// Description : Memberfunctions for Class PKW in Vehicle Sim 1923
+// Description : Class for PKW in Vehicle Sim 1923
 //============================================================================
 
 #include "h/PKW.hpp"
