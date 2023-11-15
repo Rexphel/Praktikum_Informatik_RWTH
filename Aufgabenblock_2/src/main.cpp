@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : main.cpp
 // Author      : Philip Rexroth
-// Version     : 0.3
+// Version     : 1.0
 // Copyright   : Copyright (c) 2023 Philip Rexroth
 // Description : Main file for Vehicle Simulator 1923
 //============================================================================
@@ -210,7 +210,7 @@ void vAufgabe_3(void){
 
 	PKW::vKopf();
 	for(unsigned int i=0; i<v_uFahrzeuge.size(); i++){
-		std::cout << *v_uFahrzeuge[i] <<'\n';
+		std::cout << *v_uFahrzeuge[i] <<std::endl;
 	}
 
 	std::unique_ptr<PKW> Benz = std::make_unique<PKW>("AMG", 200.9,9,60);

@@ -1,9 +1,9 @@
 //============================================================================
 // Name        : FreeFunctions.cpp
 // Author      : Philip Rexroth
-// Version     : 0.0.1
+// Version     : 1.0
 // Copyright   : Copyright (c) 2023 Philip Rexroth
-// Description : Standard Class for Vehicles in Vehicle Sim 1923
+// Description : Free functions for Vehicles in Vehicle Sim 1923
 //============================================================================
 
 #include "GlobalIncludes.hpp"

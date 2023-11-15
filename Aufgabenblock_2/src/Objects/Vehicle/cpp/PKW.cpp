@@ -1,12 +1,12 @@
 //============================================================================
 // Name        : Aufgabenblock_1.cpp
 // Author      : Philip Rexroth
-// Version     : 0.5
+// Version     : 1.0
 // Copyright   : Copyright (c) 2023 Philip Rexroth
-// Description : Class for PKW in Vehicle Sim 1923
+// Description : Memberfunctions for Class PKW in Vehicle Sim 1923
 //============================================================================
 
-#include "h/PKW.hpp"
+#include "../headers/PKW.hpp"
 
 extern double dGlobaleZeit;
 
@@ -20,7 +20,7 @@ std::ostream& operator <<(std::ostream& o, const PKW& x){
 }
 
 void PKW::vSimulieren(void){
-	double ddeltaTime = dGlobaleZeit - Fahrzeug::getLastTime();
+	double ddeltaTime = dGlobaleZeit - Fahrzeug::Simulationsobjekt::getLastTime();
 	double dusedFuel = getConsumpt()*ddeltaTime;
 	double dFuelratio = getFuellevel()!=0 ? 1:0;
 	//double dFuelratio = getFuellevel()/dusedFuel<1 ? getFuellevel()/dusedFuel:1;				// More precise calculation.... commented out due to the assignment speciffically asking to.

@@ -17,9 +17,13 @@
 #include <vector>
 #include <random>
 
-#include "Fahrzeuge/h/Fahrrad.hpp"
-#include "Fahrzeuge/h/Fahrzeug.hpp"
-#include "Fahrzeuge/h/PKW.hpp"
+#include "Objects/Simulationsobjekt.hpp"
+
+#include "Objects/Roads/headers/Weg.hpp"
+
+#include "Objects/Vehicle/headers/Fahrrad.hpp"
+#include "Objects/Vehicle/headers/Fahrzeug.hpp"
+#include "Objects/Vehicle/headers/PKW.hpp"
 
 #define WINDOWS 1
 #define LINUX 0

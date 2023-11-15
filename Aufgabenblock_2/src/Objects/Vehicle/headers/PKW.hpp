@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : PKW.h
 // Author      : Philip Rexroth
-// Version     : 0.5
+// Version     : 1.0
 // Copyright   : Copyright (c) 2023 Philip Rexroth
 // Description : Class for PKW in Vehicle Sim 1923
 //============================================================================
@@ -26,7 +26,7 @@ class PKW : public Fahrzeug{
 	public:
 		PKW() = delete;
 		PKW(std::string sName, double dMaxSpeed, double dconsuption, double dMaxFuel = 55);
-		PKW operator=(const PKW& f){return PKW(f.p_sName,f.p_dMaxGeschwindigkeit,f.p_dVerbrauch,f.p_dTankvolumen);}
+		PKW operator=(const PKW& f){return PKW(f.p_sName, f.p_dMaxGeschwindigkeit, f.p_dVerbrauch, f.p_dTankvolumen);}
 		void vSimulieren(void) override;
 		double getConsumpt(void) const{return p_dVerbrauch;}
 		double getVolume(void) const{return p_dTankvolumen;}
