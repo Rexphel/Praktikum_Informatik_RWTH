@@ -30,20 +30,25 @@ void Weg::vAusgeben(std::ostream& o)const{
 	Simulationsobjekt::vAusgeben(o);
 	o.width(12);																				//12 Space for Length
 	o << std::setiosflags(std::ios::right) << p_dLaenge;									//Output p_dMaxGeschwindigkeit right aligned
+	std::cout.width(1); std::cout <<"";
 	o.width(3);																				//20 space for TotalDistance
-	o << "(" ;
+	o << "( " ;
 	for (const std::unique_ptr<Fahrzeug>& f : p_pFahrzeuge){
-		o.width(15);
-		o << f->getName() << ",";
+		o << f->getName() << ", ";
 	}
-	o << ")" << std::resetiosflags(std::ios::right);								//Output p_dGesammtStrecke right aligned
+	o << " )" << std::resetiosflags(std::ios::right);								//Output p_dGesammtStrecke right aligned
 }
 
 void Weg::vKopf(void){
 	Simulationsobjekt::vKopf();
-	std::cout.width(17);
-	std::cout << std::setiosflags(std::ios::right) << "Road length" ;
+	std::cout.width(1); std::cout <<"";
+	std::cout << "|";
+	std::cout.width(1); std::cout <<"";
+	std::cout.width(10);
+	std::cout << std::setiosflags(std::ios::right) << "Road length" << std::resetiosflags(std::ios::right);
+	std::cout.width(1); std::cout <<"";
+	std::cout << "|";
+	std::cout.width(1); std::cout <<"";
 	std::cout.width(20);
-	std::cout << "Vehicles" << std::resetiosflags(std::ios::right);
-	std::cout << std::setfill('-') << std::setw(55)<<"\n" << std::setfill(' ');
+	std::cout << std::setiosflags(std::ios::left) << "Vehicles" << std::resetiosflags(std::ios::left);
 }

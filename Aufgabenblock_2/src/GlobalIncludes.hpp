@@ -29,7 +29,7 @@
 #define LINUX 0
 #define DEBUG TRUE
 
-std::string setStringlength(long long i, std::string s);																//Function to set a given string to any given size
+std::string setStringlength(long long unsigned i, std::string s);																//Function to set a given string to any given size
 
 double randDouble(int lower, int upper);
 

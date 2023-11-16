@@ -10,9 +10,8 @@
 
 extern double dGlobaleZeit;
 
-std::string setStringlength(long long lengt, std::string s);
 
-PKW::PKW(std::string sName, double dMaxSpeed, double dconsuption, double dMaxFuel) : Fahrzeug(setStringlength(14, sName), (dMaxSpeed>0 ? dMaxSpeed:0)), p_dVerbrauch(dconsuption), p_dTankvolumen(dMaxFuel), p_dTankinhalt(dMaxFuel/2){}
+PKW::PKW(std::string sName, double dMaxSpeed, double dconsuption, double dMaxFuel) : Fahrzeug(sName, (dMaxSpeed>0 ? dMaxSpeed:0)), p_dVerbrauch(dconsuption), p_dTankvolumen(dMaxFuel), p_dTankinhalt(dMaxFuel/2){}
 
 std::ostream& operator <<(std::ostream& o, const PKW& x){
 	x.vAusgeben(o);

@@ -35,6 +35,7 @@ class Simulationsobjekt{
 		virtual void vSimulieren() = 0;
 		virtual void vAusgeben(std::ostream& out) const;
 		static void vKopf(void);
+		static void vLinie(int length);
 
 };
 

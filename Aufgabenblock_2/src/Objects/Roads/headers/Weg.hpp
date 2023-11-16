@@ -29,6 +29,7 @@ class Weg : public Simulationsobjekt {
 		virtual ~Weg();
 		double getLength(void){return p_dLaenge;}
 		double getSpeedLimit(void){return getTempolimit(p_eTempolimit); }
+		void pushFahrzeug(std::unique_ptr<Fahrzeug> f){p_pFahrzeuge.push_back(move(f));}
 		void vSimulieren(void) override;
 		void vAusgeben(std::ostream& s)const override;
 		static void vKopf(void);

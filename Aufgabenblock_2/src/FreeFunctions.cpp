@@ -10,7 +10,8 @@
 
 double dGlobaleZeit = 0.0;
 
-std::string setStringlength(long long i, std::string s){																//Function to set a given string to any given size
+std::string setStringlength(long long unsigned i, std::string s){																//Function to set a given string to any given size
+	if(s.size()<=i){return s;}
 	s.resize(i,' ');
 	return s;
 }

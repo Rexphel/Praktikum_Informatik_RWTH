@@ -17,13 +17,14 @@ int main() {
 	void vAufgabe_1_verbose(void);*/
 	void vAufgabe_2(int iFahrzeuge);
 	void vAufgabe_3(void);
+	void vAufgabe_4(void);
 	void vAufgabe_Probe();
 
 	std::cout << "Starting Vehicle Simulator 1923" << std::endl;
 
 	dGlobaleZeit = 1;
 
-	vAufgabe_2(4);
+	vAufgabe_4();
 
 	return 0;
 }
@@ -217,22 +218,17 @@ void vAufgabe_3(void){
 
 }
 
-using namespace std;
+void vAufgabe_4(void){
+	std::unique_ptr<Weg> weg1 = std::make_unique<Weg>("B5600000000000", 5000);
 
-double dEpsilon = 0.001;
+	weg1->pushFahrzeug(std::make_unique<PKW>("Audi", randDouble(50, 350), randDouble(4, 20),randDouble(30, 200)));
+	weg1->pushFahrzeug(std::make_unique<Fahrrad>("MTB", randDouble(12,40)));
+	weg1->pushFahrzeug(std::make_unique<PKW>("Mercedes", randDouble(50, 350), randDouble(4, 20),randDouble(30, 200)));
 
-void vAufgabe_Probe() {
-    Fahrzeug* pF1 = new PKW("Audi", 150, 8);
-    dGlobaleZeit = 0.0;
-    Fahrzeug::vKopf();
-    dGlobaleZeit = 5;
-    cout << '\n' << "Globalezeit = " << dGlobaleZeit << '\n';
-    pF1->vSimulieren();
-    std::cout << *pF1 << endl;
-    delete pF1;
-    char c;
-    std::cin >> c;
+
+	Weg::vKopf();
+	Weg::vLinie(50);
+	std::cout << *weg1 << std::endl;
 }
-
 
 

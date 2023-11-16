@@ -14,7 +14,7 @@
 #define DEBUG_MSG(str) do { } while ( false )
 #endif
 
-std::string setStringlength(long long lengt, std::string s);
+std::string setStringlength(long long unsigned lengt, std::string s);
 
 Simulationsobjekt::Simulationsobjekt(std::string s): p_sName(setStringlength(14, s)){
 	DEBUG_MSG("Vehicle n." << p_iID << " is being created");
@@ -42,11 +42,21 @@ void Simulationsobjekt::vAusgeben(std::ostream& out) const{
 	out.width(2);std::cout << "";																	//Create 2 Space between ID and Name
 	out.width(15);																				//15 Space for Name. (Name max 15 Chars)
 	out << std::setiosflags(std::ios::left) << p_sName << std::resetiosflags(std::ios::left);		//Output p_sName left aligned
+	out << ":";
 }
 void Simulationsobjekt::vKopf(void){
-	std::cout.width(6);
+	std::cout.width(4);
 	std::resetiosflags(std::ios::right);
 	std::cout << std::setiosflags(std::ios::left) << "ID";
-	std::cout.width(10);
+	std::cout << "|";
+	std::cout.width(1); std::cout <<"";
+	std::cout.width(14);
 	std::cout << "Name" << std::resetiosflags(std::ios::left);
+}
+
+void Simulationsobjekt::vLinie(int length){
+	std::ios init(NULL);
+	init.copyfmt(std::cout);																	//Save default IO Flags
+	std::cout << std::endl << std::setfill('-') << std::setw(length) << ""  << std::endl;
+    std::cout.copyfmt(init);																	//Restore IO Flags
 }
