@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : PKW.h
+// Name        : PKW.hpp
 // Author      : Philip Rexroth
 // Version     : 1.0
 // Copyright   : Copyright (c) 2023 Philip Rexroth

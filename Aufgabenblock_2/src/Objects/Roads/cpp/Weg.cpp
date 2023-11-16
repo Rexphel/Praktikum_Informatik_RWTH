@@ -15,6 +15,15 @@ Weg::Weg(std::string s, double länge, Tempolimit limit): Simulationsobjekt(s), 
 
 Weg::~Weg(void){};
 
+std::unique_ptr<Fahrzeug> Weg::popFahrzeug(int iter){
+
+	std::list<std::unique_ptr<Fahrzeug>>::iterator it = std::next(p_pFahrzeuge.begin(), iter);
+	std::unique_ptr<Fahrzeug> temp = move(*it);
+	p_pFahrzeuge.erase(it);
+
+	return temp;
+}
+
 void Weg::vSimulieren(void){
 	for (std::unique_ptr<Fahrzeug>& f : p_pFahrzeuge){
 		f->vSimulieren();

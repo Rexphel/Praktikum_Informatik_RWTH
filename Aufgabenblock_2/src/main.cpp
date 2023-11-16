@@ -220,15 +220,23 @@ void vAufgabe_3(void){
 
 void vAufgabe_4(void){
 	std::unique_ptr<Weg> weg1 = std::make_unique<Weg>("B5600000000000", 5000);
+	std::unique_ptr<Weg> weg2 = std::make_unique<Weg>("B56", 10000);
 
 	weg1->pushFahrzeug(std::make_unique<PKW>("Audi", randDouble(50, 350), randDouble(4, 20),randDouble(30, 200)));
 	weg1->pushFahrzeug(std::make_unique<Fahrrad>("MTB", randDouble(12,40)));
 	weg1->pushFahrzeug(std::make_unique<PKW>("Mercedes", randDouble(50, 350), randDouble(4, 20),randDouble(30, 200)));
 
+	weg2->pushFahrzeug(weg1->popFahrzeug(1));
 
 	Weg::vKopf();
 	Weg::vLinie(50);
 	std::cout << *weg1 << std::endl;
+	std::cout << *weg2 << std::endl;
+
+	std::string s;
+	std::cin >> s;
+
+
 }
 
 

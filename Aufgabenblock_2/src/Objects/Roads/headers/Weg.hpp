@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : Fahrrad.cpp
 // Author      : Philip Rexroth
-// Version     : 0.1
+// Version     : 0.2
 // Copyright   : Copyright (c) 2023 Philip Rexroth
 // Description : Class for Weg in Vehicle Sim 1923
 //============================================================================
@@ -30,6 +30,7 @@ class Weg : public Simulationsobjekt {
 		double getLength(void){return p_dLaenge;}
 		double getSpeedLimit(void){return getTempolimit(p_eTempolimit); }
 		void pushFahrzeug(std::unique_ptr<Fahrzeug> f){p_pFahrzeuge.push_back(move(f));}
+		std::unique_ptr<Fahrzeug> popFahrzeug(int iter);
 		void vSimulieren(void) override;
 		void vAusgeben(std::ostream& s)const override;
 		static void vKopf(void);

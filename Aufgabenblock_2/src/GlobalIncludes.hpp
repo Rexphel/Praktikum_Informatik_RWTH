@@ -24,6 +24,7 @@
 #include "Objects/Vehicle/headers/Fahrrad.hpp"
 #include "Objects/Vehicle/headers/Fahrzeug.hpp"
 #include "Objects/Vehicle/headers/PKW.hpp"
+#include "Objects/Vehicle/headers/Verhalten.hpp"
 
 #define WINDOWS 1
 #define LINUX 0
