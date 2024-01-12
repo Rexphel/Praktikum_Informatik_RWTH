@@ -7,11 +7,25 @@
 //============================================================================
 
 #include "../headers/Verhalten.hpp"
+#include "../headers/Fahrzeug.hpp"
+#include "../../Roads/headers/Weg.hpp"
 
 Verhalten::Verhalten(Weg& w): weg(w){}
 
 
-double dStrecke(Fahrzeug& aFzg, double dZeitIntervall){
-	double d;
-	return d;
+double Verhalten::dStrecke(Fahrzeug& aFzg, double dZeitIntervall){
+
+	double dMaxDistance = aFzg.dGeschwindigkeit()*dZeitIntervall;
+	double dDrivenDistance = aFzg.getAbschnittStrecke()+dMaxDistance;
+	double dLength = weg.getLength();
+	double dRealDistance= dDrivenDistance<dLength ? dMaxDistance:(dMaxDistance-(dDrivenDistance-dLength));
+
+	if (dRealDistance<dMaxDistance){
+		std::cout<<"Reached the End of the Road"<<std::endl;
+	}
+	else if (dRealDistance==0) {
+		std::cout<<"Still at the End of the Road"<<std::endl;
+	}
+
+	return  dRealDistance;
 }

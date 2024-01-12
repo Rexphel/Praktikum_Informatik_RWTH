@@ -9,8 +9,8 @@
 #ifndef OBJECTS_VEHICLE_HEADERS_VERHALTEN_HPP_
 #define OBJECTS_VEHICLE_HEADERS_VERHALTEN_HPP_
 
-#include "../../Roads/headers/Weg.hpp"
-#include "Fahrzeug.hpp"
+class Weg;
+class Fahrzeug;
 
 class Verhalten{
 	private:

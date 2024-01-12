@@ -20,6 +20,7 @@
 #include "Objects/Simulationsobjekt.hpp"
 
 #include "Objects/Roads/headers/Weg.hpp"
+#include "Objects/Roads/headers/Tempolimit.hpp"
 
 #include "Objects/Vehicle/headers/Fahrrad.hpp"
 #include "Objects/Vehicle/headers/Fahrzeug.hpp"
@@ -27,8 +28,7 @@
 #include "Objects/Vehicle/headers/Verhalten.hpp"
 
 #define WINDOWS 1
-#define LINUX 0
-#define DEBUG TRUE
+#define DEBUG 1
 
 std::string setStringlength(long long unsigned i, std::string s);																//Function to set a given string to any given size
 

@@ -18,14 +18,15 @@
 class PKW : public Fahrzeug{
 
 	private:
-		double p_dVerbrauch = 0.0;
-		double p_dTankvolumen;
-		double p_dTankinhalt = 0.0;
+		const double p_dVerbrauch;
+		const double p_dTankvolumen;
+		double p_dTankinhalt;
 		PKW(const PKW&) = delete;			//Do not allow Copy Constructor
         friend std::ostream & operator<<(std::ostream& o, const PKW& x);
 	public:
 		PKW() = delete;
 		PKW(std::string sName, double dMaxSpeed, double dconsuption, double dMaxFuel = 55);
+		virtual ~PKW();
 		PKW operator=(const PKW& f){return PKW(f.p_sName,f.p_dMaxGeschwindigkeit,f.p_dVerbrauch,f.p_dTankvolumen);}
 		void vSimulieren(void) override;
 		double getConsumpt(void) const{return p_dVerbrauch;}

@@ -21,9 +21,8 @@
 #include "Fahrzeuge/h/Fahrzeug.hpp"
 #include "Fahrzeuge/h/PKW.hpp"
 
-#define WINDOWS 1
-#define LINUX 0
-#define DEBUG TRUE
+#define WINDOWS
+#define DEBUG
 
 std::string setStringlength(long long i, std::string s);																//Function to set a given string to any given size
 

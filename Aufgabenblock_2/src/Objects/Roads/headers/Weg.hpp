@@ -12,8 +12,10 @@
 #include <list>
 #include <memory>
 
-#include "../../Vehicle/headers/Fahrzeug.hpp"
+#include "../../Simulationsobjekt.hpp"
 #include "Tempolimit.hpp"
+
+class Fahrzeug;
 
 class Weg : public Simulationsobjekt {
 	private:
@@ -21,19 +23,20 @@ class Weg : public Simulationsobjekt {
 		friend std::ostream& operator<<(std::ostream &o, const Weg &x);
 	protected:
 		const double p_dLaenge;
-		const Tempolimit p_eTempolimit;
+		Tempolimit p_eTempolimit;
 		std::list<std::unique_ptr<Fahrzeug>> p_pFahrzeuge;
 	public:
 		Weg();
-		Weg(std::string s, double länge, Tempolimit limit=Tempolimit::Autobahn);
+		Weg(std::string s, double länge, Tempolimit limit= Tempolimit::Autobahn);
 		virtual ~Weg();
 		double getLength(void){return p_dLaenge;}
-		double getSpeedLimit(void){return getTempolimit(p_eTempolimit); }
+		double getSpeedLimit(void){return static_cast<int>(p_eTempolimit); }
 		void pushFahrzeug(std::unique_ptr<Fahrzeug> f){p_pFahrzeuge.push_back(move(f));}
 		std::unique_ptr<Fahrzeug> popFahrzeug(int iter);
 		void vSimulieren(void) override;
 		void vAusgeben(std::ostream& s)const override;
 		static void vKopf(void);
+		void vAnnahme(std::unique_ptr<Fahrzeug>);
 
 };
 

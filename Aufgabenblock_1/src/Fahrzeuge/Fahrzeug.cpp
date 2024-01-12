@@ -8,6 +8,8 @@
 
 #include "h/Fahrzeug.hpp"
 
+#define DEBUG
+
 extern double dGlobaleZeit;
 
 std::string setStringlength(long long lengt, std::string s);

@@ -11,12 +11,11 @@
 
 #include <limits>
 
-enum class Tempolimit{
-	Innerorts,
-	Landstraße,
+enum class Tempolimit : int{
+	Innerorts=50,
+	Landstraße=100,
 	Autobahn=std::numeric_limits<int>::max()
 };
 
-double getTempolimit(Tempolimit t);
 
 #endif /* OBJECTS_ROADS_HEADERS_TEMPOLIMIT_HPP_ */

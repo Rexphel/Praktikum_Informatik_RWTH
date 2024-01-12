@@ -8,6 +8,8 @@
 
 
 #include "../headers/Weg.hpp"
+#include "../../Vehicle/headers/Fahrzeug.hpp"
+#include "../headers/Tempolimit.hpp"
 
 Weg::Weg(): Simulationsobjekt(""), p_dLaenge(100), p_eTempolimit(Tempolimit::Autobahn){}
 
@@ -60,4 +62,8 @@ void Weg::vKopf(void){
 	std::cout.width(1); std::cout <<"";
 	std::cout.width(20);
 	std::cout << std::setiosflags(std::ios::left) << "Vehicles" << std::resetiosflags(std::ios::left);
+}
+
+void Weg::vAnnahme(std::unique_ptr<Fahrzeug> f){
+	Weg::pushFahrzeug(move(f));
 }

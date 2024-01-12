@@ -23,10 +23,9 @@ double randDouble(int lower, int upper){
 }
 
 void console_clear_screen(void) {
-  #ifdef WINDOWS
+  #if WINDOWS
   system("cls");
-  #endif
-  #ifdef LINUX
+  #else
   system("clear");
   #endif
 }

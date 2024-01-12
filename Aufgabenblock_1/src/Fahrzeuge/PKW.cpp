@@ -12,7 +12,9 @@ extern double dGlobaleZeit;
 
 std::string setStringlength(long long lengt, std::string s);
 
-PKW::PKW(std::string sName, double dMaxSpeed, double dconsuption, double dMaxFuel) : Fahrzeug(setStringlength(14, sName), (dMaxSpeed>0 ? dMaxSpeed:0)), p_dVerbrauch(dconsuption), p_dTankvolumen(dMaxFuel), p_dTankinhalt(dMaxFuel/2){}
+PKW::PKW(std::string sName, double dMaxSpeed, double dconsuption, double dMaxFuel) : Fahrzeug(setStringlength(14, sName),(dMaxSpeed>0 ? dMaxSpeed:0)), p_dVerbrauch(dconsuption), p_dTankvolumen(dMaxFuel), p_dTankinhalt(dMaxFuel/2){}
+
+PKW::~PKW(){}
 
 std::ostream& operator <<(std::ostream& o, const PKW& x){
 	x.vAusgeben(o);
@@ -20,24 +22,24 @@ std::ostream& operator <<(std::ostream& o, const PKW& x){
 }
 
 void PKW::vSimulieren(void){
-	double ddeltaTime = dGlobaleZeit - Fahrzeug::getLastTime();
-	double dusedFuel = getConsumpt()*ddeltaTime;
-	double dFuelratio = getFuellevel()!=0 ? 1:0;
+	double ddeltaTime = dGlobaleZeit - p_dZeit;
+	double dusedFuel = p_dVerbrauch*ddeltaTime;
+	double dFuelratio = p_dTankinhalt!=0 ? 1:0;
 	//double dFuelratio = getFuellevel()/dusedFuel<1 ? getFuellevel()/dusedFuel:1;				// More precise calculation.... commented out due to the assignment speciffically asking to.
-	double ddeltaFuel = getFuellevel()-dusedFuel;
-	Fahrzeug::setTotalDistance(getTotalDistance()+ dGeschwindigkeit()*ddeltaTime*dFuelratio);
-	Fahrzeug::setTotalTime(getTotalTime()+ddeltaTime);
+	double ddeltaFuel = p_dTankinhalt-dusedFuel;
+	Fahrzeug::setTotalDistance(p_dGesamtStrecke + dGeschwindigkeit()*ddeltaTime*dFuelratio);
+	Fahrzeug::setTotalTime(p_dGesamtZeit+ddeltaTime);
 	Fahrzeug::setLastTime(dGlobaleZeit);
 	setFuellevel((ddeltaFuel>0) ? ddeltaFuel:0);
 }
 
-double PKW::dTanken(){
-	double deltaTank = getVolume()-getFuellevel();
-	setFuellevel(getVolume());
+double PKW::dTanken(void){
+	double deltaTank = p_dTankvolumen-p_dTankinhalt;
+	setFuellevel(p_dTankvolumen);
 	return deltaTank;
 }
 double PKW::dTanken(double dquantity){
-	setFuellevel(getFuellevel()+dquantity);
+	setFuellevel(p_dTankinhalt+dquantity);
 	return dquantity;
 }
 
@@ -58,5 +60,5 @@ void PKW::vKopf(void){
 	std::cout << std::setiosflags(std::ios::right) << "Fuellevel" ;
 	std::cout.width(17);
 	std::cout << "Used Fuel" << "\n" << std::resetiosflags(std::ios::right);
-	std::cout << std::setfill('-') << std::setw(120)<<std::endl << std::setfill(' ');
+	std::cout << std::setfill('-') << std::setw(120)<<""<<std::endl << std::setfill(' ');
 }

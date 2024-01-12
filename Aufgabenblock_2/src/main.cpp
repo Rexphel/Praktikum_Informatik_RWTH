@@ -18,13 +18,15 @@ int main() {
 	void vAufgabe_2(int iFahrzeuge);
 	void vAufgabe_3(void);
 	void vAufgabe_4(void);
+	void vAufgabe_5(void);
 	void vAufgabe_Probe();
+
 
 	std::cout << "Starting Vehicle Simulator 1923" << std::endl;
 
 	dGlobaleZeit = 1;
 
-	vAufgabe_4();
+	vAufgabe_5();
 
 	return 0;
 }
@@ -187,8 +189,6 @@ void vAufgabe_2(int iFahrzeuge){
 			}
 		}
 		dGlobaleZeit += 0.5;
-
-
 	}
 }
 
@@ -219,7 +219,7 @@ void vAufgabe_3(void){
 }
 
 void vAufgabe_4(void){
-	std::unique_ptr<Weg> weg1 = std::make_unique<Weg>("B5600000000000", 5000);
+	std::unique_ptr<Weg> weg1 = std::make_unique<Weg>("B5600000000000", 5000, Tempolimit::Innerorts);
 	std::unique_ptr<Weg> weg2 = std::make_unique<Weg>("B56", 10000);
 
 	weg1->pushFahrzeug(std::make_unique<PKW>("Audi", randDouble(50, 350), randDouble(4, 20),randDouble(30, 200)));
@@ -236,7 +236,32 @@ void vAufgabe_4(void){
 	std::string s;
 	std::cin >> s;
 
-
 }
 
+void vAufgabe_5(void){
+	std::unique_ptr<Weg> weg1 = std::make_unique<Weg>("B5600000000000", 5000, Tempolimit::Innerorts);
+
+	weg1->pushFahrzeug(std::make_unique<PKW>("Audi", randDouble(50, 350), randDouble(4, 20),randDouble(30, 200)));
+	weg1->pushFahrzeug(std::make_unique<Fahrrad>("MTB", randDouble(12,40)));
+	weg1->pushFahrzeug(std::make_unique<PKW>("Mercedes", randDouble(50, 350), randDouble(4, 20),randDouble(30, 200)));
+
+	bool stop = false;
+		while(!stop){
+			Weg::vKopf();
+			Weg::vLinie(50);
+			std::cout << *weg1 << std::endl;
+
+			std::string s;
+			std::cin >> s;
+
+			if(s == "stop"){stop=true;}
+
+			console_clear_screen();
+
+			weg1->vSimulieren();
+
+			dGlobaleZeit += 0.5;
+		}
+
+}
 

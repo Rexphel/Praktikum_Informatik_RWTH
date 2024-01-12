@@ -7,6 +7,8 @@
 //============================================================================
 
 #include "../headers/Fahrzeug.hpp"
+#include "../../Roads/headers/Weg.hpp"
+#include "../headers/Verhalten.hpp"
 
 extern double dGlobaleZeit;
 
@@ -14,14 +16,10 @@ Fahrzeug::Fahrzeug(std::string s, double d): Simulationsobjekt(s), p_dMaxGeschwi
 
 Fahrzeug::~Fahrzeug(void){};
 
-std::ostream& operator <<(std::ostream& o, const Fahrzeug& x){
-	x.vAusgeben(o);
-	return o;
-}
-
 void Fahrzeug::vSimulieren() {
 	double ideltaTime = dGlobaleZeit - getLastTime();
-	Fahrzeug::setTotalDistance(getTotalDistance()+ dGeschwindigkeit()*ideltaTime);
+	double deltaDistance = Fahrzeug::p_pVerhalten->dStrecke(*this, ideltaTime);
+	Fahrzeug::vUpdateDistance(deltaDistance);
 	Fahrzeug::setTotalTime(getTotalTime()+ideltaTime);
 	Fahrzeug::setLastTime(dGlobaleZeit);
 }
@@ -36,11 +34,28 @@ void Fahrzeug::vAusgeben(std::ostream& out) const{
 	out << p_dGesamtStrecke << std::resetiosflags(std::ios::right);								//Output p_dGesammtStrecke right aligned
 }
 
+void Fahrzeug::vUpdateDistance(double distance){
+	Fahrzeug::p_dAbschnittStrecke += distance;
+	Fahrzeug::p_dGesamtStrecke += distance;
+}
+
+
+void Fahrzeug::vNeueStrecke(Weg& weg){
+	Fahrzeug::p_pVerhalten = std::make_unique<Verhalten>(weg);
+	Fahrzeug::p_dAbschnittStrecke = 0.0 ;
+}
+
+
 bool operator <(const Fahrzeug& x, const Fahrzeug& y){
 	if(x.getTotalDistance()<y.getTotalDistance()){
 		return true;
 	}
 	return false;
+}
+
+std::ostream& operator <<(std::ostream& o, const Fahrzeug& x){
+	x.vAusgeben(o);
+	return o;
 }
 
 

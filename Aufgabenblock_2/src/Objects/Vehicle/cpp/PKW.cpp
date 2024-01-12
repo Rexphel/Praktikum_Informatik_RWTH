@@ -24,7 +24,7 @@ void PKW::vSimulieren(void){
 	double dFuelratio = getFuellevel()!=0 ? 1:0;
 	//double dFuelratio = getFuellevel()/dusedFuel<1 ? getFuellevel()/dusedFuel:1;				// More precise calculation.... commented out due to the assignment speciffically asking to.
 	double ddeltaFuel = getFuellevel()-dusedFuel;
-	Fahrzeug::setTotalDistance(getTotalDistance()+ dGeschwindigkeit()*ddeltaTime*dFuelratio);
+	Fahrzeug::vUpdateDistance(dGeschwindigkeit()*ddeltaTime*dFuelratio);
 	Fahrzeug::setTotalTime(getTotalTime()+ddeltaTime);
 	Fahrzeug::setLastTime(dGlobaleZeit);
 	setFuellevel((ddeltaFuel>0) ? ddeltaFuel:0);
