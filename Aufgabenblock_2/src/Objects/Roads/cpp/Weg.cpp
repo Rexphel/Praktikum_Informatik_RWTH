@@ -32,6 +32,12 @@ void Weg::vSimulieren(void){
 	}
 }
 
+void Weg::vAusgeben(void){
+	for(std::unique_ptr<Fahrzeug>& f : p_pFahrzeuge){
+		std::cout << *f << '\n';
+	}
+}
+
 std::ostream& operator<<(std::ostream &o, const Weg &x){
 	x.vAusgeben(o);
 	return o;

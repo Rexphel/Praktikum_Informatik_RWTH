@@ -50,12 +50,10 @@ class Verhalten{
 		Weg& weg;
 	public:
 		Verhalten()=delete;
-		Verhalten(Weg& w);
-		double dStrecke(Fahrzeug& aFzg, double dZeitIntervall);
+		Verhalten(Weg& w): weg(w){};
+		virtual ~Verhalten();
+		virtual double dStrecke(Fahrzeug& aFzg, double dZeitIntervall);
 
 };
-
-
-
 #endif /* OBJECTS_VEHICLE_HEADERS_VERHALTEN_HPP_ */
 >>>>>>> 75c89d8 Merged with Laptop
