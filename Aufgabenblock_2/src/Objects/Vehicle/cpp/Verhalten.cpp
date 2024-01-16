@@ -16,9 +16,9 @@ Verhalten::Verhalten(Weg& w): weg(w){}
 double Verhalten::dStrecke(Fahrzeug& aFzg, double dZeitIntervall){
 
 	double dMaxDistance = aFzg.dGeschwindigkeit()*dZeitIntervall;
-	double dDrivenDistance = aFzg.getAbschnittStrecke()+dMaxDistance;
+	double dMaxDrivenDistance = aFzg.getAbschnittStrecke()+dMaxDistance;
 	double dLength = weg.getLength();
-	double dRealDistance= dDrivenDistance<dLength ? dMaxDistance:(dMaxDistance-(dDrivenDistance-dLength));
+	double dRealDistance= dMaxDrivenDistance<dLength ? dMaxDistance:(dMaxDistance-(dMaxDrivenDistance-dLength));
 
 	if (dRealDistance<dMaxDistance){
 		std::cout<<"Reached the End of the Road"<<std::endl;

@@ -25,8 +25,8 @@ class PKW : public Fahrzeug{
         friend std::ostream & operator<<(std::ostream& o, const PKW& x);
 	public:
 		PKW() = delete;
-		PKW(std::string sName, double dMaxSpeed, double dconsuption, double dMaxFuel = 55);
-		PKW operator=(const PKW& f){return PKW(f.p_sName, f.p_dMaxGeschwindigkeit, f.p_dVerbrauch, f.p_dTankvolumen);}
+		PKW(Fahrzeug f, double dconsuption, double dMaxFuel = 55);
+		PKW operator=(const PKW& f){return PKW(Fahrzeug(f), f.p_dVerbrauch, f.p_dTankvolumen);}
 		void vSimulieren(void) override;
 		double getConsumpt(void) const{return p_dVerbrauch;}
 		double getVolume(void) const{return p_dTankvolumen;}

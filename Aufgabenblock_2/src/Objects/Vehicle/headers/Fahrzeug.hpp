@@ -31,9 +31,10 @@ class Fahrzeug: public Simulationsobjekt {
 		std::unique_ptr<Verhalten> p_pVerhalten;
 	public:
 		Fahrzeug() = delete;
-		Fahrzeug(std::string p_sName, double p_dMaxGeschwindigkeit, Verhalten& p_Verhalten);
+		Fahrzeug(std::string p_sName, double p_dMaxGeschwindigkeit, Verhalten p_Verhalten);
+		Fahrzeug(std::string p_sName, double p_dMaxGeschwindigkeit, std::unique_ptr<Verhalten> p_Verhalten);
 		virtual ~Fahrzeug();
-		Fahrzeug operator=(const Fahrzeug &f) {return Fahrzeug(f.p_sName, f.p_dMaxGeschwindigkeit, *f.p_pVerhalten);}
+		Fahrzeug operator=(const Fahrzeug &f) {return Fahrzeug(f.p_sName, f.p_dMaxGeschwindigkeit, move(f.p_pVerhalten));}
 		void vSimulieren(void) override;
 		static void vKopf(void);
 		void vAusgeben(std::ostream &out) const override;

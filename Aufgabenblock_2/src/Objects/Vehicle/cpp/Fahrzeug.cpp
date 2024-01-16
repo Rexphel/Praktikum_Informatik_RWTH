@@ -12,7 +12,8 @@
 
 extern double dGlobaleZeit;
 
-Fahrzeug::Fahrzeug(std::string s, double d): Simulationsobjekt(s), p_dMaxGeschwindigkeit(d>0 ? d:0){};		//Check if d is smaller than 0 (i.e. negative), set it to 0. Could also use std::abs(d) to set it to remove the -. Depends on application. Use of setStringlength to keep the name sting from breaking the output
+Fahrzeug::Fahrzeug(std::string s, double d, Verhalten v): Simulationsobjekt(s), p_dMaxGeschwindigkeit(d>0 ? d:0), p_pVerhalten(std::make_unique<Verhalten>(v)){};		//Check if d is smaller than 0 (i.e. negative), set it to 0. Could also use std::abs(d) to set it to remove the -. Depends on application. Use of setStringlength to keep the name sting from breaking the output
+Fahrzeug::Fahrzeug(std::string s, double d, std::unique_ptr<Verhalten> v): Simulationsobjekt(s), p_dMaxGeschwindigkeit(d>0 ? d:0), p_pVerhalten(v){};		//Check if d is smaller than 0 (i.e. negative), set it to 0. Could also use std::abs(d) to set it to remove the -. Depends on application. Use of setStringlength to keep the name sting from breaking the output
 
 Fahrzeug::~Fahrzeug(void){};
 
