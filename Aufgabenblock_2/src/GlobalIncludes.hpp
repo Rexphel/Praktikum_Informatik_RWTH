@@ -26,9 +26,12 @@
 #include "Objects/Vehicle/headers/Fahrzeug.hpp"
 #include "Objects/Vehicle/headers/PKW.hpp"
 #include "Objects/Vehicle/headers/Verhalten.hpp"
+#include "Objects/Vehicle/headers/Fahren.hpp"
+#include "Objects/Vehicle/headers/Parken.hpp"
 
 #define WINDOWS 1
-#define DEBUG 1
+#define LINUX 0
+#define DEBUG TRUE
 
 std::string setStringlength(long long unsigned i, std::string s);																//Function to set a given string to any given size
 
