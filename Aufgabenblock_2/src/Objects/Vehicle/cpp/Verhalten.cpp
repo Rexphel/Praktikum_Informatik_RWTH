@@ -1,4 +1,3 @@
-<<<<<<< Upstream, based on branch 'master' of https://github.com/Rexphel/Praktikum_Informatik_RWTH.git
 //============================================================================
 // Name        : Verhalten.hpp
 // Author      : Philip Rexroth
@@ -10,8 +9,6 @@
 #include "../headers/Verhalten.hpp"
 #include "../headers/Fahrzeug.hpp"
 #include "../../Roads/headers/Weg.hpp"
-
-Verhalten::Verhalten(Weg& w): weg(w){}
 
 
 double Verhalten::dStrecke(Fahrzeug& aFzg, double dZeitIntervall){
@@ -30,22 +27,3 @@ double Verhalten::dStrecke(Fahrzeug& aFzg, double dZeitIntervall){
 
 	return  dRealDistance;
 }
-=======
-//============================================================================
-// Name        : Verhalten.hpp
-// Author      : Philip Rexroth
-// Version     : 0.1
-// Copyright   : Copyright (c) 2023 Philip Rexroth
-// Description : Member Functions for the behavior of Vehicles in Vehicle Sim 1923
-//============================================================================
-
-#include "../headers/Verhalten.hpp"
-
-Verhalten::Verhalten(Weg& w): weg(w){}
-
-
-double dStrecke(Fahrzeug& aFzg, double dZeitIntervall){
-	double d=9;
-	return d;
-}
->>>>>>> 75c89d8 Merged with Laptop

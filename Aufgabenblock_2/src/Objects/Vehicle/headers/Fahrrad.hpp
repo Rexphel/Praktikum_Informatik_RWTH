@@ -17,8 +17,8 @@ class Fahrrad : public Fahrzeug{
 	private:
 		Fahrrad(const Fahrrad&) = delete;			//Do not allow Copy Constructor
 	public:
-		Fahrrad(std::string s, double d);
-		Fahrrad operator=(const Fahrrad& f){return Fahrrad(f.p_sName, f.getMaxSpeed());}
+		Fahrrad(std::string sName, double dMaxGeschwindigkeit, Weg& weg);
+//		Fahrrad operator=(const Fahrrad& f){return Fahrrad(f.p_sName, f.p_dMaxGeschwindigkeit, move(f.p_pVerhalten));}
 
 		double dGeschwindigkeit(void)const;
 };

@@ -11,7 +11,7 @@
 extern double dGlobaleZeit;
 
 
-PKW::PKW(Fahrzeug f, double dconsuption, double dMaxFuel = 55) : Fahrzeug(f), p_dVerbrauch(dconsuption), p_dTankvolumen(dMaxFuel), p_dTankinhalt(dMaxFuel/2){};
+PKW::PKW(std::string sName, double dGesch, Weg& weg, double dconsuption, double dMaxFuel) : Fahrzeug(sName, dGesch, weg), p_dVerbrauch(dconsuption), p_dTankvolumen(dMaxFuel), p_dTankinhalt(dMaxFuel/2){};
 
 std::ostream& operator <<(std::ostream& o, const PKW& x){
 	x.vAusgeben(o);
