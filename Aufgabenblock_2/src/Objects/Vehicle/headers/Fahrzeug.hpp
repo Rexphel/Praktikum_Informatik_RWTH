@@ -42,8 +42,9 @@ class Fahrzeug: public Simulationsobjekt {
 		virtual double dTanken(double dquantity) {return 0.0;}
 		void vNeueStrecke(Weg& weg);
 		void vNeueStrecke(Weg& weg, double dStartZeit);
+		virtual void vZeichnen(const Weg&){};
 		//Getter&Setter
-		int getID(void) {return p_iID;}
+		int getID(void) const {return p_iID;}
 		double getMaxSpeed(void) const {return p_dMaxGeschwindigkeit;}
 		double getTotalDistance(void) const {return p_dGesamtStrecke;}
 		double getTotalTime(void) const {return p_dGesamtZeit;}

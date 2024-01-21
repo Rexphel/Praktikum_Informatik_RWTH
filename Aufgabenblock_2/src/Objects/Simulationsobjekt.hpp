@@ -26,8 +26,8 @@ class Simulationsobjekt{
 		double p_dZeit = 0.0;
 	public:
 		void setLastTime(double d){p_dZeit=d;}
-		int getID(void){return p_iID;}
-		std::string getName(void){return p_sName;}
+		int getID(void) const {return p_iID;}
+		std::string getName(void) const {return p_sName;}
         friend std::ostream& operator<<(std::ostream& o, const Simulationsobjekt& x);
         friend bool operator==(const Simulationsobjekt& x, const Simulationsobjekt& y);
 		double getLastTime(void) const{return p_dZeit;}

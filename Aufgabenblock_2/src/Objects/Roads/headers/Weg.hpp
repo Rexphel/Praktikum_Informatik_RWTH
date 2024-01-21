@@ -29,8 +29,8 @@ class Weg : public Simulationsobjekt {
 		Weg();
 		Weg(std::string s, double länge, Tempolimit limit= Tempolimit::Autobahn);
 		virtual ~Weg();
-		double getLength(void){return p_dLaenge;}
-		double getSpeedLimit(void){return static_cast<int>(p_eTempolimit); }
+		double getLength(void) const {return p_dLaenge;}
+		double getSpeedLimit(void) const {return static_cast<int>(p_eTempolimit); }
 		void pushFahrzeug(std::unique_ptr<Fahrzeug> f){p_pFahrzeuge.push_back(move(f));}
 		std::unique_ptr<Fahrzeug> popFahrzeug(int iter);
 		void vSimulieren(void) override;

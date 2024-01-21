@@ -23,6 +23,7 @@ class Fahrrad : public Fahrzeug{
 		Fahrrad operator=(const Fahrrad& f){return Fahrrad(f.p_sName, f.p_dMaxGeschwindigkeit);}
 
 		double dGeschwindigkeit(void)const;
+		void vZeichnen(const Weg&) override;
 };
 
 

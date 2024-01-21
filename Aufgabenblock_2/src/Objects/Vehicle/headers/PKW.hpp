@@ -28,15 +28,16 @@ class PKW : public Fahrzeug{
 		PKW(std::string sName, double dGesch, double dconsuption, double dMaxFuel = 55);
 		PKW operator=(const PKW& f){return PKW(f.p_sName, f.p_dMaxGeschwindigkeit, f.p_dVerbrauch, f.p_dTankvolumen);}
 		void vSimulieren(void) override;
+		void vAusgeben(std::ostream& o) const override;
+		static void vKopf(void);
+		double dTanken(void);
+		double dTanken(double dquantity);
+		double dGeschwindigkeit(void) const override;
+		void vZeichnen(const Weg&) override;
 		double getConsumpt(void) const override{return p_dVerbrauch;}
 		double getVolume(void) const{return p_dTankvolumen;}
 		double getFuellevel(void) const{return p_dTankinhalt;}
 		void setFuellevel(double dTankinhalt){p_dTankinhalt=dTankinhalt;}
-		double dTanken(void);
-		double dTanken(double dquantity);
-		double dGeschwindigkeit(void) const override;
-		void vAusgeben(std::ostream& o) const override;
-		static void vKopf(void);
 };
 
 #endif // PKW_H
