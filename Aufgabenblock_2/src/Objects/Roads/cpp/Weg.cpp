@@ -36,6 +36,7 @@ void Weg::vSimulieren(void){
 
 void Weg::vAusgeben(void){
 	for(std::unique_ptr<Fahrzeug>& f : p_pFahrzeuge){
+		f->vZeichnen(*this);
 		std::cout << *f << '\n';
 	}
 }

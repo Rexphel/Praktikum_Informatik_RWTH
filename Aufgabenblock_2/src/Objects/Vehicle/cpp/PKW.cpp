@@ -10,6 +10,7 @@
 #include "../../Roads/headers/Weg.hpp"
 #include "../../Exceptions/headers/Losfahren.hpp"
 #include "../../Exceptions/headers/Streckenende.hpp"
+#include "../../../GrafischeAusgabe/SimuClient.h"
 
 extern double dGlobaleZeit;
 
@@ -50,6 +51,10 @@ double PKW::dTanken(double dquantity){
 double PKW::dGeschwindigkeit(void) const{
 	return p_pVerhalten->getRoad().getSpeedLimit()< getMaxSpeed()? p_pVerhalten->getRoad().getSpeedLimit() : getMaxSpeed();
 
+}
+
+void PKW::vZeichnen(const Weg& weg){
+	bZeichnePKW(p_sName, weg.getName(), (p_dAbschnittStrecke/weg.getLength()), dGeschwindigkeit(), p_dTankinhalt);
 }
 
 void PKW::vAusgeben(std::ostream& o) const{

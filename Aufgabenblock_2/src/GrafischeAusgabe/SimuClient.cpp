@@ -117,6 +117,7 @@ SIMUCLIENT_API bool bInitialisiereGrafik(int sizeX, int sizeY, const char* addre
    Port = s.str();
 
    string programName = "java -jar SimuServer.jar " + Port;
+
    std::thread worker (executeProgram, programName);
    worker.detach();
    //std::this_thread::sleep_for (std::chrono::seconds(2));

@@ -17,9 +17,9 @@ extern double dGlobaleZeit;
 double Fahren::dStrecke(Fahrzeug& aFzg, double dZeitIntervall){
 
 	double dSpeed = aFzg.dGeschwindigkeit();
+	double dLength = p_aWeg.getLength();
 	double dMaxDrivenDistance = dSpeed*dZeitIntervall;
 	double dTotalDrivenDistance = aFzg.getAbschnittStrecke()+dMaxDrivenDistance;
-	double dLength = p_aWeg.getLength();
 	double dDrivenDistance= dTotalDrivenDistance<dLength ? dMaxDrivenDistance:dLength-aFzg.getAbschnittStrecke();
 
 	if (std::abs(0-dDrivenDistance)<0.0001) {
