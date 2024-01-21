@@ -11,15 +11,16 @@
 #define OBJECTS_VEHICLE_HEADERS_FAHREN_HPP_
 
 #include "Verhalten.hpp"
+class Weg;
 class Fahrzeug;
 
 class Fahren : public Verhalten{
 	private:
+		Fahren(const Fahren&)=delete;
 	protected:
 	public:
 		Fahren()=delete;
 		Fahren(Weg& weg):Verhalten(weg){};
-		~Fahren();
 		double dStrecke(Fahrzeug& aFzg, double dZeitIntervall);
 };
 

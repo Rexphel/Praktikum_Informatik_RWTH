@@ -10,6 +10,8 @@
 #include "../headers/Weg.hpp"
 #include "../../Vehicle/headers/Fahrzeug.hpp"
 #include "../headers/Tempolimit.hpp"
+#include "../../Vehicle/headers/Fahren.hpp"
+#include "../../Vehicle/headers/Parken.hpp"
 
 Weg::Weg(): Simulationsobjekt(""), p_dLaenge(100), p_eTempolimit(Tempolimit::Autobahn){}
 
@@ -71,5 +73,50 @@ void Weg::vKopf(void){
 }
 
 void Weg::vAnnahme(std::unique_ptr<Fahrzeug> f){
-	Weg::pushFahrzeug(move(f));
+	f->setVerhalten(std::make_unique<Fahren>(*this));
+	pushFahrzeug(move(f));
+}
+
+void Weg::vAnnahme(std::unique_ptr<Fahrzeug> f, double dStartZeit){
+	f->setVerhalten(std::make_unique<Parken>(*this, dStartZeit));
+	pushFahrzeug(move(f));
+}
+
+
+void Weg::vTanken(double vol){
+	if (vol == 0){
+		for (std::unique_ptr<Fahrzeug>& f : p_pFahrzeuge){
+			f->dTanken();
+		}
+	}
+	else{
+		for (std::unique_ptr<Fahrzeug>& f : p_pFahrzeuge){
+			f->dTanken(vol);
+		}
+	}
+}
+
+void Weg::vTanken(int iter, double vol){
+
+	std::list<std::unique_ptr<Fahrzeug>>::iterator it = std::next(p_pFahrzeuge.begin(), iter);
+
+	vol==0 ? it->get()->dTanken():it->get()->dTanken(vol);
+
+}
+
+void Weg::vFahren(int iter, Weg& weg){
+
+	std::list<std::unique_ptr<Fahrzeug>>::iterator it = std::next(p_pFahrzeuge.begin(), iter);
+
+	it->get()->setVerhalten(std::make_unique<Fahren>(*this));
+}
+
+double Weg::vGetSpeedLimit(void){
+	return static_cast<int>(p_eTempolimit);
+}
+
+void Weg::printTank(void){
+	for (std::unique_ptr<Fahrzeug>& f : p_pFahrzeuge){
+		std::cout << f->getConsumpt();
+	}
 }

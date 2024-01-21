@@ -22,15 +22,18 @@
 #include "Objects/Roads/headers/Weg.hpp"
 #include "Objects/Roads/headers/Tempolimit.hpp"
 
+#include "Objects/Vehicle/headers/Fahren.hpp"
 #include "Objects/Vehicle/headers/Fahrrad.hpp"
 #include "Objects/Vehicle/headers/Fahrzeug.hpp"
+#include "Objects/Vehicle/headers/Parken.hpp"
 #include "Objects/Vehicle/headers/PKW.hpp"
 #include "Objects/Vehicle/headers/Verhalten.hpp"
-#include "Objects/Vehicle/headers/Fahren.hpp"
-#include "Objects/Vehicle/headers/Parken.hpp"
 
-#define WINDOWS 1
-#define LINUX 0
+#include "Objects/Exceptions/headers/Fahrausnahme.hpp"
+#include "Objects/Exceptions/headers/Losfahren.hpp"
+#include "Objects/Exceptions/headers/Streckenende.hpp"
+
+#define _WIN32 1
 #define DEBUG TRUE
 
 std::string setStringlength(long long unsigned i, std::string s);																//Function to set a given string to any given size

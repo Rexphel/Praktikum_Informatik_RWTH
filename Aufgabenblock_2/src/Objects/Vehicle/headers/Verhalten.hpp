@@ -16,11 +16,12 @@ class Verhalten{
 	private:
 		Verhalten(const Verhalten&)=delete;
 	protected:
-		Weg& weg;
+		Weg& p_aWeg;
 	public:
 		Verhalten()=delete;
-		Verhalten(Weg& w): weg(w){};
+		Verhalten(Weg& w): p_aWeg(w){};
 		virtual ~Verhalten();
+		Weg& getRoad(void){return p_aWeg;};
 		virtual double dStrecke(Fahrzeug& aFzg, double dZeitIntervall);
 
 };

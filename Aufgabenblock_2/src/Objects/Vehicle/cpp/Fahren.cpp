@@ -8,10 +8,31 @@
 
 #include "../headers/Fahren.hpp"
 #include "../headers/Fahrzeug.hpp"
+#include "../../Roads/headers/Weg.hpp"
+#include "../../Exceptions/headers/Streckenende.hpp"
+#include <math.h>
+
+extern double dGlobaleZeit;
 
 double Fahren::dStrecke(Fahrzeug& aFzg, double dZeitIntervall){
-	double distance = aFzg.getTotalDistance() + aFzg.dGeschwindigkeit()*dZeitIntervall;
-	return distance;
-}
 
+	double dSpeed = aFzg.dGeschwindigkeit();
+	double dMaxDrivenDistance = dSpeed*dZeitIntervall;
+	double dTotalDrivenDistance = aFzg.getAbschnittStrecke()+dMaxDrivenDistance;
+	double dLength = p_aWeg.getLength();
+	double dDrivenDistance= dTotalDrivenDistance<dLength ? dMaxDrivenDistance:dLength-aFzg.getAbschnittStrecke();
+
+	if (std::abs(0-dDrivenDistance)<0.0001) {
+		std::cout<<"Still at the End of the Road"<<std::endl;
+		throw Streckenende(aFzg, p_aWeg);
+	}
+	else if (dDrivenDistance<dMaxDrivenDistance|| std::abs(dLength-aFzg.getAbschnittStrecke()-dMaxDrivenDistance)<0.0001){
+		std::cout<<"Reached the End of the Road"<<std::endl;
+	}
+	aFzg.vUpdateDistance(dDrivenDistance);
+	aFzg.setTotalTime(aFzg.getTotalTime()+dZeitIntervall);
+	aFzg.setLastTime(dGlobaleZeit);
+	return  dDrivenDistance;
+
+}
 

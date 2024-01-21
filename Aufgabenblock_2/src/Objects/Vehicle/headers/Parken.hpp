@@ -10,17 +10,18 @@
 #ifndef OBJECTS_VEHICLE_HEADERS_PARKEN_HPP_
 #define OBJECTS_VEHICLE_HEADERS_PARKEN_HPP_
 
-class Verhalten;
+#include "Verhalten.hpp"
+class Fahrzeug;
 class Weg;
 
 class Parken : public Verhalten{
 	private:
+		Parken(const Parken&)=delete;
 	protected:
 		double p_dStartzeitpunkt;
 	public:
-		Parken(Weg& weg, double dStartzeitpunkt);
-
+		Parken(Weg& weg, double dStartzeitpunkt) : Verhalten(weg), p_dStartzeitpunkt(dStartzeitpunkt){};
+		double dStrecke(Fahrzeug& aFzg, double dZeitIntervall);
 };
-
 
 #endif /* OBJECTS_VEHICLE_HEADERS_PARKEN_HPP_ */

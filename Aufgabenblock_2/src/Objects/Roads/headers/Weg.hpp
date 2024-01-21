@@ -37,8 +37,13 @@ class Weg : public Simulationsobjekt {
 		void vAusgeben(void);
 		void vAusgeben(std::ostream& s)const override;
 		static void vKopf(void);
-		void vAnnahme(std::unique_ptr<Fahrzeug>);
-
+		void vAnnahme(std::unique_ptr<Fahrzeug> f);
+		void vAnnahme(std::unique_ptr<Fahrzeug> f, double dStartZeit);
+		void vTanken(double vol=0);
+		void vTanken(int iter, double vol=0);
+		void vFahren(int iter, Weg& );
+		double vGetSpeedLimit(void);
+		void printTank(void);
 };
 
 

@@ -13,12 +13,14 @@
 
 #include "Fahrzeug.hpp"
 
+class Weg;
+
 class Fahrrad : public Fahrzeug{
 	private:
 		Fahrrad(const Fahrrad&) = delete;			//Do not allow Copy Constructor
 	public:
-		Fahrrad(std::string sName, double dMaxGeschwindigkeit, Weg& weg);
-//		Fahrrad operator=(const Fahrrad& f){return Fahrrad(f.p_sName, f.p_dMaxGeschwindigkeit, move(f.p_pVerhalten));}
+		Fahrrad(std::string sName, double dMaxGeschwindigkeit);
+		Fahrrad operator=(const Fahrrad& f){return Fahrrad(f.p_sName, f.p_dMaxGeschwindigkeit);}
 
 		double dGeschwindigkeit(void)const;
 };

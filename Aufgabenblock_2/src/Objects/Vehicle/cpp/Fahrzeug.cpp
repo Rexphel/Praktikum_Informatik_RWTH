@@ -8,21 +8,22 @@
 
 #include "../headers/Fahrzeug.hpp"
 #include "../../Roads/headers/Weg.hpp"
-#include "../headers/Verhalten.hpp"
 #include "../headers/Fahren.hpp"
+#include "../headers/Parken.hpp"
+#include "../../Exceptions/headers/Fahrausnahme.hpp"
 
 extern double dGlobaleZeit;
 
-Fahrzeug::Fahrzeug(std::string s, double d, Weg& weg): p_pVerhalten(std::make_unique<Verhalten>(weg)), Simulationsobjekt(s), p_dMaxGeschwindigkeit(d>0 ? d:0) {};		//Check if d is smaller than 0 (i.e. negative), set it to 0. Could also use std::abs(d) to set it to remove the -. Depends on application. Use of setStringlength to keep the name sting from breaking the output
-
-Fahrzeug::~Fahrzeug(void){};
+Fahrzeug::Fahrzeug(std::string s, double d): Simulationsobjekt(s), p_dMaxGeschwindigkeit(d>0 ? d:0) {};		//Check if d is smaller than 0 (i.e. negative), set it to 0. Could also use std::abs(d) to set it to remove the -. Depends on application. Use of setStringlength to keep the name sting from breaking the output
 
 void Fahrzeug::vSimulieren() {
 	double ideltaTime = dGlobaleZeit - getLastTime();
-	double deltaDistance = Fahrzeug::p_pVerhalten->dStrecke(*this, ideltaTime);
-	Fahrzeug::vUpdateDistance(deltaDistance);
-	Fahrzeug::setTotalTime(getTotalTime()+ideltaTime);
-	Fahrzeug::setLastTime(dGlobaleZeit);
+	try{
+		Fahrzeug::p_pVerhalten->dStrecke(*this, ideltaTime);
+	}
+	catch(Fahrausnahme& e){
+		e.vBearbeiten();
+	}
 }
 
 void Fahrzeug::vAusgeben(std::ostream& out) const{
@@ -42,7 +43,12 @@ void Fahrzeug::vUpdateDistance(double distance){
 
 
 void Fahrzeug::vNeueStrecke(Weg& weg){
-	Fahrzeug::p_pVerhalten = std::make_unique<Verhalten>(weg);
+	Fahrzeug::p_pVerhalten = std::make_unique<Fahren>(weg);
+	Fahrzeug::p_dAbschnittStrecke = 0.0 ;
+}
+
+void Fahrzeug::vNeueStrecke(Weg& weg, double dStartZeit){
+	Fahrzeug::p_pVerhalten = std::make_unique<Parken>(weg, dStartZeit);
 	Fahrzeug::p_dAbschnittStrecke = 0.0 ;
 }
 

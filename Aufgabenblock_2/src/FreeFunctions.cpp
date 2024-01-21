@@ -23,7 +23,7 @@ double randDouble(int lower, int upper){
 }
 
 void console_clear_screen(void) {
-  #if WINDOWS
+  #if defined _WIN32
   system("cls");
   #else
   system("clear");

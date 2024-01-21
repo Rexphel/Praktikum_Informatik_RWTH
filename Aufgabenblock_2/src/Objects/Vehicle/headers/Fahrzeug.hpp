@@ -15,9 +15,8 @@
 #include <memory>
 
 #include "../../Simulationsobjekt.hpp"
-
+#include "Verhalten.hpp"
 class Weg;
-class Verhalten;
 
 class Fahrzeug: public Simulationsobjekt {
 	private:
@@ -31,24 +30,28 @@ class Fahrzeug: public Simulationsobjekt {
 		std::unique_ptr<Verhalten> p_pVerhalten;
 	public:
 		Fahrzeug() = delete;
-		Fahrzeug(std::string p_sName, double p_dMaxGeschwindigkeit, Weg& weg);
-		virtual ~Fahrzeug();
-//		Fahrzeug operator=(const Fahrzeug &f) {return Fahrzeug(f.p_sName, f.p_dMaxGeschwindigkeit, move(f.p_pVerhalten));}
+		Fahrzeug(std::string p_sName, double p_dMaxGeschwindigkeit);
+		virtual ~Fahrzeug() {};
+		Fahrzeug operator=(const Fahrzeug &f) {return Fahrzeug(f.p_sName, f.p_dMaxGeschwindigkeit);}
 		void vSimulieren(void) override;
 		static void vKopf(void);
 		void vAusgeben(std::ostream &out) const override;
 		void vUpdateDistance(double distance);
 		virtual double dGeschwindigkeit() const {return p_dMaxGeschwindigkeit;}
 		virtual double dTanken(void) {return 0.0;}
+		virtual double dTanken(double dquantity) {return 0.0;}
 		void vNeueStrecke(Weg& weg);
+		void vNeueStrecke(Weg& weg, double dStartZeit);
 		//Getter&Setter
 		int getID(void) {return p_iID;}
 		double getMaxSpeed(void) const {return p_dMaxGeschwindigkeit;}
 		double getTotalDistance(void) const {return p_dGesamtStrecke;}
 		double getTotalTime(void) const {return p_dGesamtZeit;}
 		double getAbschnittStrecke(void) const {return p_dAbschnittStrecke;}
+		virtual double getConsumpt(void) const{return 0;}
 		void setTotalDistance(double d) {p_dGesamtStrecke = d;}
 		void setTotalTime(double d) {p_dGesamtZeit = d;}
+		void setVerhalten(std::unique_ptr<Verhalten> verhalten){p_pVerhalten = move(verhalten);}
 
 };
 
