@@ -17,6 +17,7 @@
 #include <vector>
 #include <random>
 
+#include "GrafischeAusgabe/SimuClient.h"
 #include "Objects/Simulationsobjekt.hpp"
 
 #include "Objects/Roads/headers/Weg.hpp"
@@ -32,6 +33,7 @@
 #include "Objects/Exceptions/headers/Fahrausnahme.hpp"
 #include "Objects/Exceptions/headers/Losfahren.hpp"
 #include "Objects/Exceptions/headers/Streckenende.hpp"
+
 
 #define _WIN32 1
 #define DEBUG TRUE

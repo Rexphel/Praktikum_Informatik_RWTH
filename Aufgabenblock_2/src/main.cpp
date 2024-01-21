@@ -92,6 +92,32 @@ void vAufgabe_5(void){
 
 }
 
-void v_Aufgabe_6(void){
+void vAufgabe_6(void){
+	Weg weg1 ("B5600000000000", 70, Tempolimit::Innerorts);
+	Weg weg2 = Weg("B56", 200);
 
+	weg1.vAnnahme(std::make_unique<PKW>("Audi", randDouble(50, 120), randDouble(4, 15),randDouble(80, 200)));
+	weg1.vAnnahme(std::make_unique<Fahrrad>("MTB", randDouble(12,40)));
+	weg1.vAnnahme(std::make_unique<PKW>("Mercedes", randDouble(50, 120), randDouble(4, 15),randDouble(80, 200)),3);
+
+	weg2.vAnnahme(weg1.popFahrzeug(1));
+
+	Weg::vKopf();
+	PKW::vLinie(50);
+	std::cout << weg1 << std::endl;
+	std::cout << weg2 << std::endl;
+
+	bool b = bInitialisiereGrafik(800, 500);
+
+	for(int i=0; i<10; i++){
+		PKW::vKopf();
+		weg1.vAusgeben();
+		weg2.vAusgeben();
+
+
+
+		weg1.vSimulieren();
+		weg2.vSimulieren();
+		dGlobaleZeit += 0.4;
+	}
 }
