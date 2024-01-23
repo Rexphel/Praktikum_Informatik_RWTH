@@ -3,7 +3,7 @@
 // Author      : Philip Rexroth
 // Version     : 0.6
 // Copyright   : Copyright (c) 2023 Philip Rexroth
-// Description : Standard Class for Vehicles in Vehicle Sim 1923
+// Description : All Classes in Vehicle Sim 1923
 //============================================================================
 
 
@@ -23,6 +23,7 @@
 #include "GrafischeAusgabe/SimuClient.h"
 #include "Roads/headers/Tempolimit.hpp"
 #include "Roads/headers/Weg.hpp"
+#include "Roads/headers/Kreuzung.hpp"
 #include "Simulationsobjekt.hpp"
 #include "Vehicle/headers/Fahren.hpp"
 #include "Vehicle/headers/Fahrrad.hpp"
@@ -33,9 +34,6 @@
 #include "VListe/vertagt_aktion.h"
 #include "VListe/vertagt_liste.h"
 
-
-#define _WIN32 1
-#define DEBUG TRUE
 
 std::string setStringlength(long long unsigned i, std::string s);																//Function to set a given string to any given size
 

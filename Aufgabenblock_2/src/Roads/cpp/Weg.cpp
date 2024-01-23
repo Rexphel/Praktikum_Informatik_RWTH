@@ -10,15 +10,16 @@
 #include "../headers/Weg.hpp"
 
 #include "../headers/Tempolimit.hpp"
+#include "../headers/Kreuzung.hpp"
 #include "../../Vehicle/headers/Fahren.hpp"
 #include "../../Vehicle/headers/Fahrzeug.hpp"
 #include "../../Vehicle/headers/Parken.hpp"
 #include "../../Exceptions/headers/Losfahren.hpp"
 #include "../../Exceptions/headers/Streckenende.hpp"
 
-Weg::Weg(): Simulationsobjekt(""), p_dLaenge(100), p_eTempolimit(Tempolimit::Autobahn){}
+Weg::Weg(): Simulationsobjekt("Default Straße"), p_dLaenge(100), p_eTempolimit(Tempolimit::Autobahn), p_kKreuzung(std::weak_ptr<Kreuzung>()){}
 
-Weg::Weg(std::string s, double länge, Tempolimit limit): Simulationsobjekt(s), p_dLaenge(länge), p_eTempolimit(limit){}
+Weg::Weg(std::string s, double länge, Tempolimit limit, std::weak_ptr<Kreuzung> kKreuzung): Simulationsobjekt(s), p_dLaenge(länge), p_eTempolimit(limit), p_kKreuzung(kKreuzung){}
 
 Weg::~Weg(void){};
 
@@ -33,6 +34,7 @@ std::unique_ptr<Fahrzeug> Weg::popFahrzeug(int iter){
 }
 
 void Weg::vSimulieren(void){
+	p_pFahrzeuge.vAktualisieren();
 	for (std::unique_ptr<Fahrzeug>& f : p_pFahrzeuge){
 		try{
 			f->vSimulieren();
@@ -47,7 +49,7 @@ void Weg::vSimulieren(void){
 void Weg::vAusgeben(void){
 	for(std::unique_ptr<Fahrzeug>& f : p_pFahrzeuge){
 		f->vZeichnen(*this);
-		std::cout << *f << '\n';
+//		std::cout << *f << '\n';
 	}
 }
 
@@ -84,12 +86,12 @@ void Weg::vKopf(void){
 }
 
 void Weg::vAnnahme(std::unique_ptr<Fahrzeug> f){
-	f->setVerhalten(std::make_unique<Fahren>(*this));
+	f->vNeueStrecke(*this);
 	p_pFahrzeuge.push_back(move(f));
 }
 
 void Weg::vAnnahme(std::unique_ptr<Fahrzeug> f, double dStartZeit){
-	f->setVerhalten(std::make_unique<Parken>(*this, dStartZeit));
+	f->vNeueStrecke(*this, dStartZeit);
 	p_pFahrzeuge.push_front(move(f));
 }
 
@@ -103,6 +105,7 @@ std::unique_ptr<Fahrzeug> Weg::pAbgabe(const Fahrzeug& aFzg){
 			break;
 		}
 	}
+	if (lFzg == nullptr) throw(std::logic_error("Null Pointer while handing over Vehicle"));
 	return lFzg;
 }
 

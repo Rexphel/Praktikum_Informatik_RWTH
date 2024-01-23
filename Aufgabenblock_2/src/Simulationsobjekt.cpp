@@ -7,6 +7,7 @@
 //============================================================================
 
 #include "Simulationsobjekt.hpp"
+#include "GlobalParameters.h"
 
 #ifdef DEBUG
 #define DEBUG_MSG(str) do { std::cout << str << std::endl; } while( false )
@@ -17,12 +18,12 @@
 std::string setStringlength(long long unsigned lengt, std::string s);
 
 Simulationsobjekt::Simulationsobjekt(std::string s): p_sName(setStringlength(14, s)){
-	DEBUG_MSG("Vehicle n." << p_iID << " is being created");
+	DEBUG_MSG("Object n." << p_iID << " is being created");
 	Simulationsobjekt::vincrMaxID();
 
 }
 Simulationsobjekt::~Simulationsobjekt(){
-	DEBUG_MSG("Vehicle n."+std::to_string(Fahrzeug::getID())+" Name:"+Fahrzeug::getName()+" is being deleted");
+	DEBUG_MSG("Object n."+std::to_string(getID())+" Name:"+getName()+" is being deleted");
 
 }
 

@@ -16,11 +16,9 @@
 extern double dGlobaleZeit;
 
 double Parken::dStrecke(Fahrzeug& aFzg, double dZeitIntervall){
-	if(dGlobaleZeit-p_dStartzeitpunkt<-0.0001){
-		aFzg.setTotalTime(aFzg.getTotalTime()+dZeitIntervall);
-		aFzg.setLastTime(dGlobaleZeit);
-		return  0;
-	}
+	aFzg.setTotalTime(aFzg.getTotalTime()+dZeitIntervall);
+	aFzg.setLastTime(dGlobaleZeit);
+	if(dGlobaleZeit<=p_dStartzeitpunkt) return  0;
 	std::cout << "Car should drive" << std::endl;
 	throw Losfahren(aFzg, p_aWeg);
 }
