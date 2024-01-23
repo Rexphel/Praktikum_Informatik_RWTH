@@ -30,7 +30,6 @@ double Fahren::dStrecke(Fahrzeug& aFzg, double dZeitIntervall){
 	else if (dDrivenDistance<dMaxDrivenDistance|| std::abs(dLength-aFzg.getAbschnittStrecke()-dMaxDrivenDistance)<0.0001){
 		std::cout<<"Reached the End of the Road"<<std::endl;
 	}
-	aFzg.vUpdateDistance(dDrivenDistance);
 	aFzg.setTotalTime(aFzg.getTotalTime()+dZeitIntervall);
 	aFzg.setLastTime(dGlobaleZeit);
 	return  dDrivenDistance;

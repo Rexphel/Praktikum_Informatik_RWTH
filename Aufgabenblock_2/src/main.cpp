@@ -12,18 +12,23 @@ extern double dGlobaleZeit;
 
 int main() {
 
+	void vTest(void);
 	void vAufgabe_4(void);
 	void vAufgabe_5(void);
 	void vAufgabe_6(void);
 	void vAufgabe_6a(void);
-
+	void vAufgabe_7(void);
 	std::cout << "Starting Vehicle Simulator 1923" << std::endl;
 
 	dGlobaleZeit = 1;
 
-	vAufgabe_6();
+	vAufgabe_7();
 
 	return 0;
+}
+
+void vTest(void){
+	for (int i = 0; i<20; i++) std::cout << rand()%6;
 }
 
 void vAufgabe_4(void){
@@ -31,7 +36,7 @@ void vAufgabe_4(void){
 	Weg weg2 = Weg("B56", 10000);
 
 	weg1.vAnnahme(std::make_unique<PKW>("Audi", randDouble(50, 350),randDouble(4, 20),randDouble(30, 200)));
-	weg1.vAnnahme(std::make_unique<Fahrrad>("MTB", randDouble(12,40)));
+	weg1.vAnnahme(std::make_unique<Fahrrad>("MTB", randDouble(25,40)));
 	weg1.vAnnahme(std::make_unique<PKW>("Mercedes", randDouble(50, 350),randDouble(4, 20),randDouble(30, 200)));
 
 	weg2.vAnnahme(weg1.popFahrzeug(1));
@@ -84,7 +89,7 @@ void vAufgabe_5(void){
 				weg1.vSimulieren();
 				weg2.vSimulieren();
 
-				dGlobaleZeit += 0.4;
+				dGlobaleZeit += 0.8;
 			}
 
 //			console_clear_screen();
@@ -125,11 +130,6 @@ void vAufgabe_6(void){
 		vSetzeZeit(dGlobaleZeit);
 		vSleep(1000);
 	}
-
-	std::cout<<"Stopping"<<std::endl;
-
-	std::string s;
-	std::cin >> s;
 }
 
 void vAufgabe_6a(void){
@@ -180,4 +180,65 @@ void vAufgabe_6a(void){
 		std::cout << item << ", ";
 	}
 	std::cout << std::endl;
+
 }
+
+void vAufgabe_7(void){
+	std::shared_ptr<Kreuzung> Kr1 = std::make_shared<Kreuzung>("Kreuzung 1");
+	std::shared_ptr<Kreuzung> Kr2 = std::make_shared<Kreuzung>("Kreuzung 2", 1000);
+	std::shared_ptr<Kreuzung> Kr3 = std::make_shared<Kreuzung>("Kreuzung 3");
+	std::shared_ptr<Kreuzung> Kr4 = std::make_shared<Kreuzung>("Kreuzung 4");
+
+
+	Kreuzung::vVerbinde("B1_S", "B1_N", 260, std::weak_ptr<Kreuzung>(Kr1), std::weak_ptr<Kreuzung>(Kr2), Tempolimit::Landstraße);
+	Kreuzung::vVerbinde("A2_S", "A2_N", 768.924, std::weak_ptr<Kreuzung>(Kr2), std::weak_ptr<Kreuzung>(Kr3));
+	Kreuzung::vVerbinde("I3_S", "I3_N", 270, std::weak_ptr<Kreuzung>(Kr2), std::weak_ptr<Kreuzung>(Kr3), Tempolimit::Innerorts);
+	Kreuzung::vVerbinde("I4_W", "I4_O", 360, std::weak_ptr<Kreuzung>(Kr2), std::weak_ptr<Kreuzung>(Kr3), Tempolimit::Innerorts);
+	Kreuzung::vVerbinde("B5_W", "B5_O", 556.423, std::weak_ptr<Kreuzung>(Kr3), std::weak_ptr<Kreuzung>(Kr4), Tempolimit::Landstraße);
+	Kreuzung::vVerbinde("A6_W", "A6_N", 845.809, std::weak_ptr<Kreuzung>(Kr4), std::weak_ptr<Kreuzung>(Kr4));
+
+	int B1 [4] = {680, 40, 680, 300};
+	int A2 [12] = {680, 300, 850, 300, 970, 390, 970, 500, 850, 570, 680, 570};
+	int I3 [4] = {680, 300, 680, 570};
+	int I4 [4] = {680, 300, 320, 300};
+	int B5 [10] = {680, 570, 500, 570, 350, 510, 320, 420, 320, 300};
+	int A6 [14] = {320, 300, 170, 300, 70, 250, 80, 90, 200, 60, 320, 150, 320, 300};
+
+	bInitialisiereGrafik(1000, 700);
+
+	bZeichneKreuzung(680, 40);
+	bZeichneKreuzung(680, 300);
+	bZeichneKreuzung(680, 570);
+	bZeichneKreuzung(320, 300);
+
+	bZeichneStrasse("B1_S", "B1_N", 260, 2, B1);
+	bZeichneStrasse("A2_S", "A2_N", 768.924, 6, A2);
+	bZeichneStrasse("I3_S", "I3_N", 270, 2, I3);
+	bZeichneStrasse("I4_W", "I4_O", 360, 2, I4);
+	bZeichneStrasse("B5_W", "B5_O", 556.423, 5, B5);
+	bZeichneStrasse("A6_W", "A6_N", 845.809, 7, A6);
+
+	Kr1->vAnnahme(std::make_unique<PKW>("Mercedes", randDouble(50, 120), randDouble(4, 15),randDouble(80, 90)),3);
+
+	for(int i=0; i<50; i++){
+
+		vSetzeZeit(dGlobaleZeit);
+
+		Kr1->vSimulieren();
+		Kr2->vSimulieren();
+		Kr3->vSimulieren();
+		Kr4->vSimulieren();
+
+
+		dGlobaleZeit += 0.2;
+
+		vSleep(1000);
+	}
+
+	std::string s;
+	std::cin >> s;
+
+	std::cout<<"Stopping"<<std::endl;
+
+}
+

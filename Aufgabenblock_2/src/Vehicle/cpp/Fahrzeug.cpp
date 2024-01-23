@@ -19,12 +19,8 @@ Fahrzeug::Fahrzeug(std::string s, double d): Simulationsobjekt(s), p_dMaxGeschwi
 
 void Fahrzeug::vSimulieren() {
 	double ideltaTime = dGlobaleZeit - getLastTime();
-	try{
-		Fahrzeug::p_pVerhalten->dStrecke(*this, ideltaTime);
-	}
-	catch(Fahrausnahme& e){
-		e.vBearbeiten();
-	}
+	double drivenDistance = Fahrzeug::p_pVerhalten->dStrecke(*this, ideltaTime);
+	vUpdateDistance(drivenDistance);
 }
 
 void Fahrzeug::vAusgeben(std::ostream& out) const{

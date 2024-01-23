@@ -24,12 +24,13 @@ std::ostream& operator <<(std::ostream& o, const PKW& x){
 
 void PKW::vSimulieren(void){
 	double ideltaTime = dGlobaleZeit - Simulationsobjekt::getLastTime();
-	double dFuelratio = getFuellevel()!=0 ? 1:0;
+	double dFuelratio = (getFuellevel()==0) ? 0:1;
 	//double dFuelratio = getFuellevel()/dusedFuel<1 ? getFuellevel()/dusedFuel:1;				// More precise calculation.... commented out due to the assignment speciffically asking to.
 	double drivenDistance = 0.0;
 	drivenDistance = Fahrzeug::p_pVerhalten->dStrecke(*this, ideltaTime)*dFuelratio;
 	double dusedFuel = getConsumpt()*drivenDistance/100;
 	double ddeltaFuel = getFuellevel()-dusedFuel;
+	vUpdateDistance(drivenDistance);
 	setFuellevel(ddeltaFuel>0 ? ddeltaFuel:0);
 }
 
