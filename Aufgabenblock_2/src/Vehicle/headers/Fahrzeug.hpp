@@ -53,7 +53,6 @@ class Fahrzeug: public Simulationsobjekt {
 		void setTotalDistance(double d) {p_dGesamtStrecke = d;}
 		void setTotalTime(double d) {p_dGesamtZeit = d;}
 		void setVerhalten(std::unique_ptr<Verhalten> verhalten){p_pVerhalten = move(verhalten);}
-
 };
 
 #endif // OBJECTS_VEHICLES_HEADERS_FAHRZEUG_HPP_
