@@ -99,6 +99,7 @@ std::unique_ptr<Fahrzeug> Weg::pAbgabe(const Fahrzeug& aFzg){
 
 	std::unique_ptr<Fahrzeug> lFzg = nullptr;
 	for (std::list<std::unique_ptr<Fahrzeug>>::iterator iFzg = p_pFahrzeuge.begin(); iFzg != p_pFahrzeuge.end(); ++iFzg){
+		if(*iFzg==nullptr)continue;
 		if(*iFzg->get()==aFzg){
 			lFzg = move(*iFzg);
 			p_pFahrzeuge.erase(iFzg);

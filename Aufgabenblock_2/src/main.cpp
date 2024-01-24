@@ -219,7 +219,7 @@ void vAufgabe_7(void){
 	bZeichneStrasse("A6_W", "A6_N", 845.809, 7, A6);
 
 	Kr1->vAnnahme(std::make_unique<PKW>("Mercedes", randDouble(50, 200), randDouble(4, 15),randDouble(90, 130)),3);
-//	Kr1->vAnnahme(std::make_unique<PKW>("Audi", randDouble(50, 120), randDouble(4, 15),randDouble(80, 90)),3);
+	Kr1->vAnnahme(std::make_unique<PKW>("Audi", randDouble(50, 120), randDouble(4, 15),randDouble(80, 90)),3);
 	Kr2->vAnnahme(std::make_unique<PKW>("Jaguar", randDouble(50, 340), randDouble(4, 15),randDouble(90, 130)),3);
 	Kr3->vAnnahme(std::make_unique<Fahrrad>("MTB", randDouble(12,40)),3);
 	Kr4->vAnnahme(std::make_unique<PKW>("BMW", randDouble(50, 100), randDouble(4, 15),randDouble(90, 130)),3);
@@ -245,4 +245,3 @@ void vAufgabe_7(void){
 	std::cout<<"Stopping"<<std::endl;
 
 }
-

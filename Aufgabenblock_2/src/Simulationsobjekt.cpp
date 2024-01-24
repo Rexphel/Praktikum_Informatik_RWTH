@@ -18,7 +18,7 @@
 std::string setStringlength(long long unsigned lengt, std::string s);
 
 Simulationsobjekt::Simulationsobjekt(std::string s): p_sName(setStringlength(14, s)){
-	DEBUG_MSG("Object n." << p_iID << " is being created");
+	DEBUG_MSG("Object n." + std::to_string(p_iID) + "Name: "+getName() + " is being created");
 	Simulationsobjekt::vincrMaxID();
 
 }
