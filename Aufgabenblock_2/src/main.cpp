@@ -193,7 +193,7 @@ void vAufgabe_7(void){
 	Kreuzung::vVerbinde("B1_S", "B1_N", 260, std::weak_ptr<Kreuzung>(Kr1), std::weak_ptr<Kreuzung>(Kr2), Tempolimit::Landstraße);
 	Kreuzung::vVerbinde("A2_S", "A2_N", 768.924, std::weak_ptr<Kreuzung>(Kr2), std::weak_ptr<Kreuzung>(Kr3));
 	Kreuzung::vVerbinde("I3_S", "I3_N", 270, std::weak_ptr<Kreuzung>(Kr2), std::weak_ptr<Kreuzung>(Kr3), Tempolimit::Innerorts);
-	Kreuzung::vVerbinde("I4_W", "I4_O", 360, std::weak_ptr<Kreuzung>(Kr2), std::weak_ptr<Kreuzung>(Kr3), Tempolimit::Innerorts);
+	Kreuzung::vVerbinde("I4_W", "I4_O", 360, std::weak_ptr<Kreuzung>(Kr2), std::weak_ptr<Kreuzung>(Kr4), Tempolimit::Innerorts);
 	Kreuzung::vVerbinde("B5_W", "B5_O", 556.423, std::weak_ptr<Kreuzung>(Kr3), std::weak_ptr<Kreuzung>(Kr4), Tempolimit::Landstraße);
 	Kreuzung::vVerbinde("A6_W", "A6_N", 845.809, std::weak_ptr<Kreuzung>(Kr4), std::weak_ptr<Kreuzung>(Kr4));
 
@@ -218,9 +218,13 @@ void vAufgabe_7(void){
 	bZeichneStrasse("B5_W", "B5_O", 556.423, 5, B5);
 	bZeichneStrasse("A6_W", "A6_N", 845.809, 7, A6);
 
-	Kr1->vAnnahme(std::make_unique<PKW>("Mercedes", randDouble(50, 120), randDouble(4, 15),randDouble(80, 90)),3);
+	Kr1->vAnnahme(std::make_unique<PKW>("Mercedes", randDouble(50, 200), randDouble(4, 15),randDouble(90, 130)),3);
+//	Kr1->vAnnahme(std::make_unique<PKW>("Audi", randDouble(50, 120), randDouble(4, 15),randDouble(80, 90)),3);
+	Kr2->vAnnahme(std::make_unique<PKW>("Jaguar", randDouble(50, 340), randDouble(4, 15),randDouble(90, 130)),3);
+	Kr3->vAnnahme(std::make_unique<Fahrrad>("MTB", randDouble(12,40)),3);
+	Kr4->vAnnahme(std::make_unique<PKW>("BMW", randDouble(50, 100), randDouble(4, 15),randDouble(90, 130)),3);
 
-	for(int i=0; i<50; i++){
+	for(int i=0; i<100; i++){
 
 		vSetzeZeit(dGlobaleZeit);
 
@@ -232,7 +236,7 @@ void vAufgabe_7(void){
 
 		dGlobaleZeit += 0.2;
 
-		vSleep(1000);
+		vSleep(100);
 	}
 
 	std::string s;
