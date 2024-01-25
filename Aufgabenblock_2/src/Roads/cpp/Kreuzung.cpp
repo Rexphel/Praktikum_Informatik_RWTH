@@ -42,12 +42,13 @@ void Kreuzung::vAnnahme(std::unique_ptr<Fahrzeug> aFzg, double startZeit){
 	p_pWege.begin()->get()->vAnnahme(move(aFzg),startZeit);
 }
 
-std::shared_ptr<Weg> Kreuzung::pZufaelligerWeg(Weg&){
+std::shared_ptr<Weg> Kreuzung::pZufaelligerWeg(Weg& iWeg){
 	if(p_pWege.size()==1){return *p_pWege.begin();}
 	std::shared_ptr<Weg> rndWeg = nullptr;
 	while(rndWeg==nullptr){
 		int index = rand()%p_pWege.size();
 		std::list<std::shared_ptr<Weg>>::iterator it = std::next(p_pWege.begin(), index);
+		if(it->get()==iWeg.getRückwet().get()){continue;}
 		rndWeg = *it;
 	}
 
