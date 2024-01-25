@@ -218,11 +218,11 @@ void vAufgabe_7(void){
 	bZeichneStrasse("B5_W", "B5_O", 556.423, 5, B5);
 	bZeichneStrasse("A6_W", "A6_N", 845.809, 7, A6);
 
-	Kr1->vAnnahme(std::make_unique<PKW>("Mercedes", randDouble(50, 200), randDouble(4, 15),randDouble(90, 130)),3);
-	Kr1->vAnnahme(std::make_unique<PKW>("Audi", randDouble(50, 120), randDouble(4, 15),randDouble(80, 90)),3);
-	Kr2->vAnnahme(std::make_unique<PKW>("Jaguar", randDouble(50, 340), randDouble(4, 15),randDouble(90, 130)),3);
+	Kr1->vAnnahme(std::make_unique<PKW>("Mercedes", randDouble(50, 200), randDouble(4, 10),randDouble(120, 200)),3);
+	Kr1->vAnnahme(std::make_unique<PKW>("Audi", randDouble(50, 120), randDouble(4, 15),randDouble(120, 200)),2);
+	Kr2->vAnnahme(std::make_unique<PKW>("Jaguar", randDouble(50, 299), randDouble(4, 15),randDouble(120, 200)),0);
 	Kr3->vAnnahme(std::make_unique<Fahrrad>("MTB", randDouble(12,40)),3);
-	Kr4->vAnnahme(std::make_unique<PKW>("BMW", randDouble(50, 100), randDouble(4, 15),randDouble(90, 130)),3);
+	Kr4->vAnnahme(std::make_unique<PKW>("BMW", randDouble(50, 100), randDouble(4, 15),randDouble(120, 200)),1);
 
 	for(int i=0; i<100; i++){
 

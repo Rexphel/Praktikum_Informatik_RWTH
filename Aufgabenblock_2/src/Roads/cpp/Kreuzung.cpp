@@ -22,7 +22,6 @@ void Kreuzung::vVerbinde(std::string sNameWegHin, std::string sNameWegRück, dou
 	kKreuzungStart.lock()->p_pWege.push_back(move(wegHin));
 	kKreuzungEnd.lock()->p_pWege.push_back(move(wegRück));
 
-
 }
 
 void Kreuzung::vTanken(Fahrzeug& aFzg){
@@ -44,8 +43,14 @@ void Kreuzung::vAnnahme(std::unique_ptr<Fahrzeug> aFzg, double startZeit){
 }
 
 std::shared_ptr<Weg> Kreuzung::pZufaelligerWeg(Weg&){
-	int index = rand()%p_pWege.size();
-	std::list<std::shared_ptr<Weg>>::iterator it = std::next(p_pWege.begin(), index);
-	return *it;
+	if(p_pWege.size()==1){return *p_pWege.begin();}
+	std::shared_ptr<Weg> rndWeg = nullptr;
+	while(rndWeg==nullptr){
+		int index = rand()%p_pWege.size();
+		std::list<std::shared_ptr<Weg>>::iterator it = std::next(p_pWege.begin(), index);
+		rndWeg = *it;
+	}
+
+	return rndWeg;
 
 }
